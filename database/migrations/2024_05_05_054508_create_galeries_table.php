@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('galeries', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->foreignUuId('wedding_id')->references('id')->on('weddings');
+            $table->string('gallery1')->nullable();
+            $table->string('gallery2')->nullable();
+            $table->string('gallery3')->nullable();
+            $table->string('gallery4')->nullable();
+            $table->string('gallery5')->nullable();
+            $table->string('gallery6')->nullable();
+            $table->string('video')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('galeries');
+    }
+};
