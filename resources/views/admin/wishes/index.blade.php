@@ -9,13 +9,34 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-            <li class="breadcrumb-item">Tables</li>
             <li class="breadcrumb-item active">Wishes</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
 
 <section class="section">
+    @if ($thanksForm === null)
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">Form Wishes</h5>
+                        </div>
+                        <div class="col mt-2" style="text-align-last: right;">
+                            <button type="button" class="btn btn-success waves-effect waves-light btn-sm m-2" data-bs-toggle="modal" data-bs-target="#modal-addThank"> <i class="bi bi-check-circle"></i> Save Form</button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Notes</label>
+                        <input name="note" type="text" class="form-control" id="formrow-firstname-input" value="Contoh : Ungkapan terima kasih yang sangat tulus dari kami apabila Saudara/i berkenan hadir dan turut memberikan doa restu kepada kami.">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    @else
     <div class="row">
         @foreach ($thanks as $data)
         <div class="col-lg-12">
@@ -38,6 +59,8 @@
         </div>
         @endforeach
     </div>
+    @endif
+
     <div class="row">
         <div class="col-lg-12">
 
@@ -59,7 +82,13 @@
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->comment }}</td>
-                                <td>{{ $data->keterangan }}</td>
+                                <td>
+                                    @if ($data->hadir == 'true')
+                                    <span class="badge bg-success"><i class="bi bi-check-circle"></i> Hadir</span>
+                                    @else
+                                    <span class="badge bg-danger"><i class="bi bi-x-circle-fill"> </i> Berhalangan</span>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

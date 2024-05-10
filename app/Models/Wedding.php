@@ -18,6 +18,7 @@ class Wedding extends Model
         'name',
         'note',
         'status',
+        'user_id',
     ];
     protected $casts = [
         'id' => 'string'
@@ -38,11 +39,6 @@ class Wedding extends Model
         return $this->hasMany(Gift::class);
     }
 
-    public function Rsvp()
-    {
-        return $this->hasMany(Rsvp::class);
-    }
-
     public function Thank()
     {
         return $this->hasMany(Thank::class);
@@ -56,5 +52,10 @@ class Wedding extends Model
     public function Galery()
     {
         return $this->hasMany(Galery::class);
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

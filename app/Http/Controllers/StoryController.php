@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Story;
+use App\Models\Wedding;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StoryController extends Controller
 {
@@ -11,60 +13,38 @@ class StoryController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        $stories = Story::all();
+        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+        $stories = Story::where('wedding_id', $wedding->id)->get();
         return view('admin.story.index', compact('stories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $wedding_id = Wedding::where('user_id', Auth::user()->id)->first();
+        Story::create(array_merge($request->all(), [
+            'wedding_id' => $wedding_id->id
+        ]));
+        return redirect()->back()->with('success', 'Data Created Successfully!');
     }
-
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(Story $story)
     {
-        //
+        return $story;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Story $story)
+    public function update(Request $request, $id)
     {
-        //
+        $story = Story::findOrFail($id);
+        $story->update($request->all());
+        return redirect()->back()->with('success', 'Data Updated Successfully!');
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Story $story)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Story $story)
     {
-        //
+        $story->delete();
+        return redirect()->back()->with('success', 'Data Deleted Successfully!');
     }
 }

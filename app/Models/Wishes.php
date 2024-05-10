@@ -18,7 +18,7 @@ class Wishes extends Model
         'wedding_id',
         'name',
         'comment',
-        'status'
+        'hadir'
     ];
     protected $casts = [
         'id' => 'string'

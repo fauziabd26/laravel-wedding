@@ -1,6 +1,5 @@
-@yield('css')
-  <!-- Vendor CSS Files -->
-  <link href="{{ URL::asset('assets/ui/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<!-- Vendor CSS Files -->
+<link href="{{ URL::asset('assets/ui/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/ui/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/ui/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/ui/vendor/quill/quill.snow.css') }}" rel="stylesheet">

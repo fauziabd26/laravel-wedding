@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wedding;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WeddingController extends Controller
 {
@@ -14,8 +15,17 @@ class WeddingController extends Controller
 
     public function index()
     {
-        $wedding = Wedding::all();
+        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
         return view('admin.wedding.index', compact('wedding'));
+    }
+
+    public function store(Request $request)
+    {
+        Wedding::create(array_merge($request->all(), [
+            'status'    => 1,
+            'user_id'   => Auth::user()->id
+        ]));
+        return redirect()->back()->with('success', 'Data Created Successfully');
     }
 
     public function update(Request $request, string $id)

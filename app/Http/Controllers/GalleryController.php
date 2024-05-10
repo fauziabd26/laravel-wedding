@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galery;
+use App\Models\Wedding;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GalleryController extends Controller
 {
@@ -14,7 +16,8 @@ class GalleryController extends Controller
 
     public function index()
     {
-        $gallery = Galery::get();
+        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+        $gallery = Galery::where('wedding_id', $wedding->id)->get();
         return view('admin.gallery.index', compact('gallery'));
     }
 

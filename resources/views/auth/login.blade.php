@@ -18,7 +18,7 @@
                 <h2>Login</h2>
                 <div class="input-box">
                     <span class="icon"><ion-icon name="mail"></ion-icon> </span>
-                    <input type="email" name="email" required class="@error('email') is-invalid @enderror" value="{{ old('email') }}">
+                    <input type="email" name="email" required class="@error('email') is-invalid @enderror" value="{{ old('email') }}" autofocus>
                     <label> Email</label>
                 </div>
                 <div class="text-danger">

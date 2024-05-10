@@ -20,9 +20,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
-    @foreach ($wedding as $item)
-    <title>{{ $item->name }}</title>
-    @endforeach
+    <title>{{ $wedding->name }}</title>
 
     <!-- mobile specific metas
     ================================================== -->
@@ -73,9 +71,8 @@
                     The Wedding
                 </div>
 
-                @foreach ($wedding as $item)
                 <h1 class="text-huge-title">
-                    {{ $item->name }}
+                    {{ request()->name }}
                 </h1>
 
                 <div class="text-pretitle">
@@ -88,7 +85,6 @@
                     </button>
                     <!-- <a href="#hidden" class="btn btn--primary smoothscroll">Open Invitation</a> -->
                 </div>
-                @endforeach
 
                 <div class="s-intro__content-bottom">
 
@@ -289,7 +285,7 @@
                                         <ul id="story">
                                             @foreach ($stories as $item)
                                             <li style="--accent-color:#41516C">
-                                                <div class="date">{{ $item->tanggal }}</div>
+                                                <div class="date">{{ date('d-F-Y', strtotime($item->tanggal)) }}</div>
                                                 <div class="title">{{ $item->judul }}</div>
                                                 <div class="descr">{{ $item->isi }}</div>
                                             </li>
@@ -303,8 +299,8 @@
                     <!-- end 03 - tab story -->
 
                     <!-- 04 - tab gallery -->
-                    @foreach ($galery as $item)
                     <div id="tab-gallery" class="tab-content__item">
+                    @foreach ($galery as $item)
                         <div class="tz-gallery">
 
                             <div class="row">
@@ -344,8 +340,9 @@
                                 <iframe class="embed-responsive-item" src="{{ $item->video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
+
                     <!-- end 04 - tab gallery -->
 
                     <!-- 05 - tab wishes -->
@@ -361,7 +358,7 @@
                                 <livewire:create-wish>
                             </div>
 
-                            <div class="column lg-6 tab-12" style=" height: 500px; overflow: auto;">
+                            <div class="column lg-6 tab-12">
                                 <p><b>Ucapan & Doa</p></b>
                                 <livewire:list-wish>
                             </div>
@@ -421,9 +418,7 @@
                 <!-- footer  -->
                 <footer>
                     <div class="ss-copyright">
-                        @foreach ($wedding as $item)
-                        <span>© Copyright {{ $item->name }} {{date("Y")}}</span>
-                        @endforeach
+                        <span>© Copyright {{ $wedding->name }} {{date("Y")}}</span>
                         <span>Developed by <a href="https://fauzi-abdilah.my.id" target="_blank">Fauzi Abdilah</a></span>
                     </div>
                 </footer>

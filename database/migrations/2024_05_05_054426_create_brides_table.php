@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('acc_name');
             $table->bigInteger('acc_number');
             $table->enum('gender', ['Male', 'Female']);
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

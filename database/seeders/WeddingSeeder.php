@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Wedding;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,13 +16,15 @@ class WeddingSeeder extends Seeder
      */
     public function run()
     {
+        $user = User::where('name', 'admin')->first();
         Wedding::create([
             'name'          => 'Fulan & Fulanah',
             'note'          => 'A great marriage is not when the perfect couple comes together. \
             It is when an imperfect couple learns to enjoy their differences.',
             'status'        => 1,
             'created_at'    => now(),
-            'updated_at'    => now()
+            'updated_at'    => now(),
+            'user_id'       => $user->id
         ]);
     }
 }

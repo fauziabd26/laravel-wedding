@@ -17,55 +17,33 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::orderBy('created_at', 'DESC')->get();
+        return view("admin.user.index", compact("user"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        User::create($request->all());
+        return redirect()->back()->with("success", "Data Created Successfully");
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
         $user = User::findOrFail($id);
         return view('admin.profile.index', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return redirect()->back()->with('success', 'Data Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'Data Deleted Successfully');
     }
 }
