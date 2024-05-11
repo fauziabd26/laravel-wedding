@@ -17,11 +17,21 @@ class WishesController extends Controller
 
     public function index()
     {
-        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
-        $thanks = Thank::with('wedding')->where('wedding_id', $wedding->id)->get();
-        $thanksForm = Thank::with('wedding')->where('wedding_id', $wedding->id)->first();
-        $wishes = Wishes::with('wedding')->where('wedding_id', $wedding->id)->get();
-        return view('admin.wishes.index', compact(['thanks', 'wishes', 'thanksForm']));
+        if (Auth::user()->is_admin == 1) {
+            $wishes = Wishes::with('wedding')->get();
+            return view('admin.wishes.index', compact(['wishes']));
+        } else {
+            $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+            if ($wedding === null) {
+                return view('admin.wishes.empty');
+            } else {
+                $thanks = Thank::with('wedding')->where('wedding_id', $wedding->id)->get();
+                $thanksForm = Thank::with('wedding')->where('wedding_id', $wedding->id)->first();
+                $wishes = Wishes::with('wedding')->where('wedding_id', $wedding->id)->get();
+                return view('admin.wishes.index', compact(['thanks', 'wishes', 'thanksForm']));
+            }
+            
+        }
     }
 
     public function thank(Request $request, $id)

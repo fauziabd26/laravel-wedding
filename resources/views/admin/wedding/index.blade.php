@@ -17,7 +17,46 @@
 <section class="section">
     <div class="row">
         <div class="col-lg-12 col-md-12">
+            @if (Auth::user()->is_admin == 'true')
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Wedding</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped datatable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama User</th>
+                                    <th class="text-center">Nama Wedding</th>
+                                    <th class="text-center">Link Wedding</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($wedding as $key => $data)
+                                <tr>
+                                    <td class="text-center">{{++$key}}</td>
+                                    <td class="text-center">{{ $data->user->fullname }}</td>
+                                    <td class="text-center">{{ $data->name }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('homeIndex', $data->name) }}" target="_blank">
+                                            {{ route('homeIndex', $data->name) }}
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit</button>
+                                        <button type="button" class="btn btn-danger waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $data->id }}"> <i class="bx bx-trash"></i> Delete</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @else
 
+            @endif
             <div class="card">
                 @if ($wedding === null)
                 <div class="card-body">
@@ -47,7 +86,7 @@
                     </form><!-- End General Form Elements -->
 
                 </div>
-                @else
+                @elseif (Auth::user()->is_admin == 0)
                 <div class="card-body">
                     <h5 class="card-title">Form Wedding</h5>
 

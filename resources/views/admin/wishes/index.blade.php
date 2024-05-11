@@ -15,6 +15,7 @@
 </div><!-- End Page Title -->
 
 <section class="section">
+    @if (Auth::user()->is_admin == 0)
     @if ($thanksForm === null)
     <div class="row">
         <div class="col-lg-12">
@@ -60,6 +61,7 @@
         @endforeach
     </div>
     @endif
+    @endif
 
     <div class="row">
         <div class="col-lg-12">
@@ -100,6 +102,7 @@
 </section>
 
 
+@if (Auth::user()->is_admin == 0)
 <!-- start modal edit -->
 @foreach ($thanks as $data)
 <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-{{ $data->id }}">
@@ -128,6 +131,7 @@
 </div>
 @endforeach
 <!-- End modal edit -->
+@endif
 
 
 @endsection

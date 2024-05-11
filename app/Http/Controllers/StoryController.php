@@ -16,9 +16,20 @@ class StoryController extends Controller
     
     public function index()
     {
-        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
-        $stories = Story::where('wedding_id', $wedding->id)->get();
-        return view('admin.story.index', compact('stories'));
+        if (Auth::user()->is_admin == 1) {
+            $stories = Story::all();
+            return view('admin.story.index', compact('stories'));
+        } else {
+            $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+            if($wedding === null){
+                $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+                return view('admin.story.index', compact('wedding'));
+            }else{
+                $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+                $stories = Story::where('wedding_id', $wedding->id)->get();
+                return view('admin.story.index', compact('stories','wedding'));
+            }
+        }
     }
 
     public function store(Request $request)

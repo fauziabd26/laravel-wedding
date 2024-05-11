@@ -5,7 +5,7 @@
     <!-- ===( CODE AASHU )=== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | {{ config('APP_NAME') }}</title>
+    <title>Login | {{ config('app.name') }}</title>
     <!-- === Custom CSS === -->
     <link rel="stylesheet" href="assets/login/css/style.css" />
 </head>

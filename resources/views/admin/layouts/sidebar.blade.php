@@ -62,7 +62,7 @@
      </li>
 
      <li class="nav-item">
-       <a class="nav-link {{ request()->is('admin/gift') ? '' : 'collapsed' }}" href="{{ route('gift.index') }}">
+       <a class="nav-link {{ request()->is('admin/invitations') ? '' : 'collapsed' }}" href="{{ route('invitations.index') }}">
          <i class="bi bi-share-fill"></i>
          <span>Mengundang Orang</span>
        </a>

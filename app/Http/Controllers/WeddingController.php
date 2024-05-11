@@ -15,7 +15,11 @@ class WeddingController extends Controller
 
     public function index()
     {
-        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+        if (Auth::user()->is_admin == 1) {
+            $wedding = Wedding::all();
+        } else {
+            $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+        }
         return view('admin.wedding.index', compact('wedding'));
     }
 

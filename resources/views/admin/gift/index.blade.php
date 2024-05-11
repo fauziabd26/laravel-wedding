@@ -22,27 +22,91 @@
                 <div class="card-body">
                     <h5 class="card-title">Form Gift</h5>
 
+                    @if (Auth::user()->is_admin == 1)
+                    <div class="table-responsive">
+                        <table class="table table-striped datatable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 5px;">No</th>
+                                    <th class="text-center" style="width: 10px;">Nama Wedding</th>
+                                    <th class="text-center" style="width: 10px;">Nama</th>
+                                    <th class="text-center" style="width: 30px;">Alamat</th>
+                                    <th class="text-center" style="width: 20px;">Maps</th>
+                                    <th class="text-center" style="width: 40px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($gift as $key => $data)
+                                <tr>
+                                    <td class="text-center">{{ ++$key }}</td>
+                                    <td class="text-center">{{ $data->wedding->name }}</td>
+                                    <td class="text-center">{{ $data->name }}</td>
+                                    <td class="text-center">{{ $data->address }}</td>
+                                    <td class="text-center">{{ $data->maps }}</td>
+                                    <td class="text-center" style="width: 50px;">
+                                        <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit</button>
+                                        <button type="button" class="btn btn-danger waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $data->id }}"> <i class="bx bx-trash"></i> Delete</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    @else
+                    @if ($gift === null)
                     <!-- General Form Elements -->
-                    @foreach ($gift as $data)
-                    <form method="POST" action="{{ route('gift.update',$data->id) }}" autocomplete="false">
+                    <form method="POST" action="{{ route('gift.store') }}" autocomplete="false">
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" value="{{ $data->name }}" autofocus>
+                                <input type="text" class="form-control" name="name" autofocus>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputEmail" class="col-sm-2 col-form-label">address</label>
                             <div class="col-sm-10">
-                                <textarea rows="7" cols="7" name="address" class="form-control">{{ $data->address }}</textarea>
+                                <textarea rows="7" cols="7" name="address" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Maps</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="maps" value="{{ $data->maps }}">
+                                <input type="text" class="form-control" name="maps" value="">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Save Form</button>
+                            </div>
+                        </div>
+
+                    </form><!-- End General Form Elements -->
+                    @else
+                    <!-- General Form Elements -->
+                    <form method="POST" action="{{ route('gift.update', $gift->id) }}" autocomplete="false">
+                        @csrf
+                        @method('PUT')
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="name" value="{{ $gift->name }}" autofocus>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail" class="col-sm-2 col-form-label">address</label>
+                            <div class="col-sm-10">
+                                <textarea rows="7" cols="7" name="address" class="form-control">{{ $gift->address }}</textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label">Maps</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="maps" value="{{ $gift->maps }}">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -53,8 +117,8 @@
                         </div>
 
                     </form><!-- End General Form Elements -->
-                    @endforeach
-
+                    @endif
+                    @endif
                 </div>
             </div>
 

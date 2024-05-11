@@ -16,9 +16,73 @@ class GalleryController extends Controller
 
     public function index()
     {
+        if (Auth::user()->is_admin == 1) {
+            $gallery = Galery::all();
+            return view('admin.gallery.index', compact('gallery'));
+        } else {
+            $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+            if ($wedding === null) {
+                $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+                return view('admin.gallery.empty', compact('wedding'));
+            } else {
+                $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+                $gallery = Galery::where('wedding_id', $wedding->id)->first();
+                return view('admin.gallery.index', compact('gallery', 'wedding'));
+            }
+        }
+    }
+
+    public function store(Request $request)
+    {
         $wedding = Wedding::where('user_id', Auth::user()->id)->first();
-        $gallery = Galery::where('wedding_id', $wedding->id)->get();
-        return view('admin.gallery.index', compact('gallery'));
+        if ($request->hasFile('gallery1')) {
+            $photo   = $request->file('gallery1');
+            $photo->storeAs('public/gallery/', $photo->getClientOriginalName());
+            Galery::create(array_merge($request->all(), [
+                'wedding_id' => $wedding->id,
+                'gallery1'      => $photo->getClientOriginalName()
+            ]));
+        } elseif ($request->hasFile('gallery2')) {
+            $photo   = $request->file('gallery2');
+            $photo->storeAs('public/gallery/', $photo->getClientOriginalName());
+            Galery::create(array_merge($request->all(), [
+                'wedding_id' => $wedding->id,
+                'gallery2'      => $photo->getClientOriginalName()
+            ]));
+        } elseif ($request->hasFile('gallery3')) {
+            $photo   = $request->file('gallery3');
+            $photo->storeAs('public/gallery/', $photo->getClientOriginalName());
+            Galery::create(array_merge($request->all(), [
+                'wedding_id' => $wedding->id,
+                'gallery3'      => $photo->getClientOriginalName()
+            ]));
+        } elseif ($request->hasFile('gallery4')) {
+            $photo   = $request->file('gallery4');
+            $photo->storeAs('public/gallery/', $photo->getClientOriginalName());
+            Galery::create(array_merge($request->all(), [
+                'wedding_id' => $wedding->id,
+                'gallery4'      => $photo->getClientOriginalName()
+            ]));
+        } elseif ($request->hasFile('gallery5')) {
+            $photo   = $request->file('gallery5');
+            $photo->storeAs('public/gallery/', $photo->getClientOriginalName());
+            Galery::create(array_merge($request->all(), [
+                'wedding_id' => $wedding->id,
+                'gallery5'      => $photo->getClientOriginalName()
+            ]));
+        } elseif ($request->hasFile('gallery6')) {
+            $photo   = $request->file('gallery6');
+            $photo->storeAs('public/gallery/', $photo->getClientOriginalName());
+            Galery::create(array_merge($request->all(), [
+                'wedding_id' => $wedding->id,
+                'gallery6'      => $photo->getClientOriginalName()
+            ]));
+        } else {
+            Galery::create(array_merge($request->all(), [
+                'wedding_id' => $wedding->id,
+            ]));
+        }
+        return redirect()->back()->with('success', 'Data Created Successfully');
     }
 
     public function update(Request $request, $id)
@@ -26,5 +90,12 @@ class GalleryController extends Controller
         $gallery = Galery::findOrFail($id);
         $gallery->update($request->all());
         return redirect()->back()->with('message', 'Data Updated Successfully');
+    }
+
+    public function delete($id)
+    {
+        $gallery = Galery::findOrFail($id);
+        $gallery->delete();
+        return redirect()->back()->with('message', 'Data Deleted Successfully');
     }
 }

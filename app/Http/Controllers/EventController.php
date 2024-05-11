@@ -16,9 +16,20 @@ class EventController extends Controller
 
     public function index()
     {
-        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
-        $events = Detail::with('wedding')->where('wedding_id', $wedding->id)->orderBy('type', 'ASC')->get();
-        return view('admin.events.index', compact('events'));
+        if (Auth::user()->is_admin == 1) {
+            $events = Detail::with('wedding')->orderBy('type', 'ASC')->get();
+            return view('admin.events.index', compact('events'));
+        } else {
+            $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+            if ($wedding === null) {
+                $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+                return view('admin.events.index', compact('wedding'));
+            } else {
+                $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+                $events = Detail::with('wedding')->where('wedding_id', $wedding->id)->orderBy('type', 'ASC')->get();
+                return view('admin.events.index', compact('events','wedding'));
+            }
+        }
     }
 
     public function store(Request $request)
