@@ -20,7 +20,7 @@ class BrideController extends Controller
     {
         if (Auth::user()->is_admin == 1) {
             $bride = Bride::all();
-            $bank = Bank::all();
+            $bank = Bank::orderBy('name', 'ASC')->get();
             return view('admin.bride.index', compact('bride', 'bank'));
         } elseif (Auth::user()->is_admin == 0) {
             $wedding_id = Wedding::where('user_id', Auth::user()->id)->first();
@@ -30,7 +30,7 @@ class BrideController extends Controller
                 return view('admin.bride.index', compact('bride','wedding_id'));
             } else {
                 $bride = Bride::with('Bank', 'Wedding')->where('wedding_id', $wedding_id->id)->get();
-                $bank = Bank::all();
+                $bank = Bank::orderBy('name', 'ASC')->get();
             }
         }
         return view('admin.bride.index', compact('bride', 'bank', 'wedding_id'));

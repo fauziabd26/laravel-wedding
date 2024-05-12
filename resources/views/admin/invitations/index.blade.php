@@ -110,9 +110,11 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Data Orang Yang Diundang</h5>
+                    @if (Auth::user()->is_admin == 0)
                     <div class="col mt-2" style="text-align-last: right;">
                         <button type="button" class="btn btn-primary waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-add"> <i class="bx bx-plus-circle"></i> Tambah Data</button>
                     </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table datatable">
                             <thead>
