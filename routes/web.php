@@ -47,5 +47,6 @@ Route::resource('/admin/story', StoryController::class);
 Route::resource('/admin/invitations', InvitationsController::class);
 Route::post('/redaksi_store', [InvitationsController::class, 'redaksiStore'])->name('redaksi.store');
 Route::put('/redaksi_update/{id}', [InvitationsController::class, 'redaksiUpdate'])->name('redaksi.update');
+Route::post('/change-password', [UserController::class, 'changePasswordSave'])->name('postChangePassword');
 
 Auth::routes();

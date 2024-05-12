@@ -108,13 +108,18 @@
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                             <!-- Profile Edit Form -->
-                            <form>
+                            <form action="{{ route('user.update', Auth::user()->id) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <div class="row mb-3">
                                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
                                         <img src="{{ URL::asset('assets/ui/img/profile-img.jpg') }}" alt="Profile">
                                         <div class="pt-2">
-                                            <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                                            <span class="btn btn-primary btn-sm btn-file">
+                                                <i class="bi bi-upload"></i>
+                                                <input type="file" disabled>
+                                            </span>
                                             <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                         </div>
                                     </div>
@@ -205,7 +210,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button disabled type="submit" class="btn btn-primary">Save Changes</button>
                                 </div>
                             </form><!-- End Profile Edit Form -->
 
@@ -256,29 +261,43 @@
 
                         <div class="tab-pane fade pt-3" id="profile-change-password">
                             <!-- Change Password Form -->
-                            <form>
-
+                            <form class="form" action="{{ route('postChangePassword') }}" method="post">
+                                @csrf
                                 <div class="row mb-3">
                                     <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="password" type="password" class="form-control" id="currentPassword">
+                                        <input name="current_password" type="password" class="form-control" id="currentPassword">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                                        <input name="new_password" type="password" class="form-control" id="newPassword">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                                        <input name="new_password_confirmation" type="password" class="form-control" id="renewPassword">
                                     </div>
                                 </div>
-
+                                @if($errors->any())
+                                {!! implode('', $errors->all('<div style="color:red">:message</div>')) !!}
+                                @endif
+                                @if(Session::get('error') && Session::get('error') != null)
+                                <div style="color:red">{{ Session::get('error') }}</div>
+                                @php
+                                Session::put('error', null)
+                                @endphp
+                                @endif
+                                @if(Session::get('success') && Session::get('success') != null)
+                                <div style="color:green">{{ Session::get('success') }}</div>
+                                @php
+                                Session::put('success', null)
+                                @endphp
+                                @endif
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Change Password</button>
                                 </div>
@@ -294,4 +313,28 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('script')
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        cursor: inherit;
+        display: block;
+    }
+</style>
 @endsection
