@@ -39,7 +39,9 @@ class BankController extends Controller
         if ($request->hasFile('logo')) {
             $logo   = $request->file('logo');
             $logo->storeAs('public/bank/', $logo->getClientOriginalName());
-            Storage::delete('public/bank/' . $bank->logo);
+            if($request->logo != null){
+                Storage::delete('public/bank/' . $bank->logo);
+            }
             $bank->update(array_merge($request->all(), [
                 'logo'      => $logo->getClientOriginalName(),
             ]));

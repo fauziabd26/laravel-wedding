@@ -16,22 +16,6 @@
 
 @if (Auth::user()->is_admin == 0)
 
-@if ($wedding === null)
-<section class="section">
-    <div class="row">
-        <div class="col-lg-12">
-
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Acara</h5>
-                    <p>Silahkan Mengisi Data Di Menu Wedding Terlebih Dahulu</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-@elseif ($wedding != null)
 <section class="section">
     <div class="row">
         <div class="col-lg-12">
@@ -80,119 +64,6 @@
         </div>
     </div>
 </section>
-
-<!-- Start modal add -->
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-add">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Add Acara</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('events.store') }}" method="POST">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Tipe Acara</label>
-                        <select id="formrow-firstname-input" name="type" class="form-control">
-                            <option disabled selected>--- Pilih Acara ---</option>
-                            <option value="Akad">Akad</option>
-                            <option value="Resepsi">Resepsi</option>
-                            <option value="Ngunduh Mantu">Ngunduh Mantu</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Tanggal</label>
-                        <input name="date" type="datetime-local" class="form-control" id="formrow-firstname-input" value="{{ old('date') }}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Alamat</label>
-                        <textarea rows="4" cols="4" name="address" class="form-control" id="formrow-firstname-input">{{ old('address') }}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Maps</label>
-                        <textarea rows="4" cols="4" name="maps" class="form-control" id="formrow-firstname-input">{{ old('maps') }}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Calendar</label>
-                        <textarea rows="4" cols="4" name="calendar" class="form-control" id="formrow-firstname-input">{{ old('calendar') }}</textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-<!-- End modal add -->
-
-<!-- start modal edit -->
-@foreach ($events as $data)
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-{{ $data->id }}">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Edit Wishes</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('story.update', $data->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Tanggal</label>
-                        <input name="tanggal" type="date" class="form-control" id="formrow-firstname-input" value="{{ $data->tanggal }}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="formrow-firstname-input" value="{{ $data->judul }}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">isi</label>
-                        <textarea rows="4" cols="4" name="isi" class="form-control" id="formrow-firstname-input">{{ $data->isi }}</textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-@endforeach
-<!-- End modal edit -->
-
-<!-- start modal Delete -->
-@foreach ($events as $data)
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-delete-{{ $data->id }}">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Delete Story</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('story.destroy', $data->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->judul }}</b>? </p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger waves-effect waves-light">Delete</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-@endforeach
-<!-- End modal Delete -->
-@endif
 
 @endif
 
@@ -248,6 +119,7 @@
     </div>
 </section>
 
+@endif
 <!-- Start modal add -->
 <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-add">
     <div class="modal-dialog">
@@ -301,24 +173,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Edit Wishes</h5>
+                <h5 class="modal-title" id="myModalLabel">Form Edit Acara</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('story.update', $data->id) }}" method="POST">
+            <form action="{{ route('events.update', $data->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
                     <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Tipe Acara</label>
+                        <select id="formrow-firstname-input" name="type" class="form-control">
+                            <option disabled selected>--- Pilih Acara ---</option>
+                            <option value="Akad" {{ "Akad" == $data->type ? 'selected' : '' }}>Akad</option>
+                            <option value="Resepsi" {{ "Resepsi" == $data->type ? 'selected' : '' }}>Resepsi</option>
+                            <option value="Ngunduh Mantu" {{ "Ngunduh Mantu" == $data->type ? 'selected' : '' }}>Ngunduh Mantu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="formrow-firstname-input" class="form-label">Tanggal</label>
-                        <input name="tanggal" type="date" class="form-control" id="formrow-firstname-input" value="{{ $data->tanggal }}">
+                        <input name="date" type="datetime-local" class="form-control" id="formrow-firstname-input" value="{{ $data->date }}">
                     </div>
                     <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="formrow-firstname-input" value="{{ $data->judul }}">
+                        <label for="formrow-firstname-input" class="form-label">Alamat</label>
+                        <textarea rows="4" cols="4" name="address" class="form-control" id="formrow-firstname-input">{{ $data->address }}</textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">isi</label>
-                        <textarea rows="4" cols="4" name="isi" class="form-control" id="formrow-firstname-input">{{ $data->isi }}</textarea>
+                        <label for="formrow-firstname-input" class="form-label">Maps</label>
+                        <textarea rows="4" cols="4" name="maps" class="form-control" id="formrow-firstname-input">{{ $data->maps }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Calendar</label>
+                        <textarea rows="4" cols="4" name="calendar" class="form-control" id="formrow-firstname-input">{{ $data->calendar }}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -338,7 +223,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Delete Story</h5>
+                <h5 class="modal-title" id="myModalLabel">Form Delete Acara</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('story.destroy', $data->id) }}" method="POST">
@@ -346,7 +231,7 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->judul }}</b>? </p>
+                        <p> Apakah <span class="text-capitalize">{{ auth()->user()->name }}</span> ingin menghapus data <b class="text-uppercase">{{ $data->wedding->name }}</b> dengan Type <b>{{ $data->type }}</b>? </p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -359,6 +244,5 @@
 </div>
 @endforeach
 <!-- End modal Delete -->
-@endif
 
 @endsection

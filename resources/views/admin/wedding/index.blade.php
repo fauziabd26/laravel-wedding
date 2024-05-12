@@ -57,7 +57,99 @@
                     </div>
                 </div>
             </div>
+            <!-- Start modal add -->
+            <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-add">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Form Add Data Wedding</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('wedding.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Name</label>
+                                    <input name="name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name') }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Note</label>
+                                    <textarea rows="5" cols="5" name="note" class="form-control" id="formrow-firstname-input"> {{ old('note') }}</textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                            </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            <!-- End modal add -->
 
+
+            <!-- start modal edit -->
+            @foreach ($wedding as $data)
+            <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-{{ $data->id }}">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Form Edit Data Wedding</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('wedding.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Name</label>
+                                    <input name="name" type="text" class="form-control" id="formrow-firstname-input" value="{{ $data->name }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Notes</label>
+                                    <textarea rows="5" cols="5" name="note" type="text" class="form-control" id="formrow-firstname-input">{{ $data->note }}</textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            @endforeach
+            <!-- End modal edit -->
+
+
+            <!-- start modal Delete -->
+            @foreach ($wedding as $data)
+            <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-delete-{{ $data->id }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">Form Delete Data Wedding</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('user.destroy', $data->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger waves-effect waves-light">Delete</button>
+                            </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+            @endforeach
+            <!-- End modal Delete -->
+            
             @endif
             <div class="card">
                 @if ($wedding === null)
@@ -123,100 +215,5 @@
         </div>
     </div>
 </section>
-
-
-<!-- Start modal add -->
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-add">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Add Data Wedding</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('wedding.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Name</label>
-                        <input name="name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name') }}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Note</label>
-                        <textarea rows="5" cols="5" name="note" class="form-control" id="formrow-firstname-input"> {{ old('note') }}</textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-<!-- End modal add -->
-
-
-<!-- start modal edit -->
-@foreach ($wedding as $data)
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-{{ $data->id }}">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Edit Data Wedding</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('wedding.update', $data->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Name</label>
-                        <input name="name" type="text" class="form-control" id="formrow-firstname-input" value="{{ $data->name }}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Notes</label>
-                        <textarea rows="5" cols="5" name="note" type="text" class="form-control" id="formrow-firstname-input">{{ $data->note }}</textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
-                    </div>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-@endforeach
-<!-- End modal edit -->
-
-
-<!-- start modal Delete -->
-@foreach ($wedding as $data)
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-delete-{{ $data->id }}">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Delete Data Wedding</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('user.destroy', $data->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger waves-effect waves-light">Delete</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-@endforeach
-<!-- End modal Delete -->
-
 
 @endsection
