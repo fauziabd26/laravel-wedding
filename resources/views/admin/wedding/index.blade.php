@@ -39,7 +39,7 @@
                                 @foreach ($wedding as $key => $data)
                                 <tr>
                                     <td class="text-center">{{++$key}}</td>
-                                    <td class="text-center">{{ $data->user->fullname }}</td>
+                                    <td class="text-center">{{ $data->user?->fullname }}</td>
                                     <td class="text-center">{{ $data->name }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('homeIndex', $data->name) }}" target="_blank">
