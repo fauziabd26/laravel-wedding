@@ -436,8 +436,10 @@
                     <path d="M7.5 1.5l.354-.354L7.5.793l-.354.353.354.354zm-.354.354l4 4 .708-.708-4-4-.708.708zm0-.708l-4 4 .708.708 4-4-.708-.708zM7 1.5V14h1V1.5H7z" fill="currentColor"></path>
                 </svg>
             </a>
-            <!-- Audio Button -->
         </div> <!-- end ss-go-top -->
+        @if ($music != null)
+
+        <!-- Audio Button -->
         <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
             <i class="fa-solid fa-circle-pause"></i>
         </button> -->
@@ -446,6 +448,7 @@
             <source src="{{ Storage::url('music') }}/{{ $music->file }}" type="audio/mpeg">
             Browsermu tidak mendukung tag audio, upgrade donk!
         </audio>
+        @endif
 
     </section> <!-- end s-details -->
 
