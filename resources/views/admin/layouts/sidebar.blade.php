@@ -67,6 +67,13 @@
          <span>Mengundang Orang</span>
        </a>
      </li>
+     
+     <li class="nav-item">
+       <a class="nav-link {{ request()->is('admin/music') ? '' : 'collapsed' }}" href="{{ route('music.index') }}">
+         <i class="bi bi-music-note-beamed"></i>
+         <span>Music MP3</span>
+       </a>
+     </li>
 
      <hr />
 

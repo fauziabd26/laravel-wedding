@@ -68,7 +68,8 @@
             <div class="column">
 
                 <div class="text-pretitle">
-                    The Wedding
+                    The Wedding <br />
+                    {{ $wedding->notes }}
                 </div>
 
                 <h1 class="text-huge-title">
@@ -119,6 +120,9 @@
                     </div> <!-- end s-intro-content__bottom-block -->
 
                 </div>
+                <div class="text-pretitle">
+                    {{ $wedding->notes }}
+                </div>
 
             </div>
         </div> <!-- s-intro__content -->
@@ -130,7 +134,6 @@
         </div> <!-- s-intro__scroll -->
 
     </section> <!-- end s-intro -->
-
 
     <!-- hidden element
     ================================================== -->
@@ -205,7 +208,7 @@
                                             </p>
                                         </a>
                                         <br>
-                                        <img src="{{ url('/storage/') }}/{{ $item->photo }}" style="height:500px; widht:auto;">
+                                        <img src="{{ Storage::url('bride') }}/{{ $item->photo }}" style="height:500px; widht:auto;">
                                         <p class="desc-bride">
                                             {{ $item->child }}
                                         </p>
@@ -300,38 +303,38 @@
 
                     <!-- 04 - tab gallery -->
                     <div id="tab-gallery" class="tab-content__item">
-                    @foreach ($galery as $item)
+                        @foreach ($galery as $item)
                         <div class="tz-gallery">
 
                             <div class="row">
                                 <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ url('/storage/') }}/{{ $item->gallery1 }}">
-                                        <img src="{{ url('/storage/') }}/{{ $item->gallery1 }}">
+                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery1 }}">
+                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery1 }}">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ url('/storage/') }}/{{ $item->gallery2 }}">
-                                        <img src="{{ url('/storage/') }}/{{ $item->gallery2 }}">
+                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery2 }}">
+                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery2 }}">
                                     </a>
                                 </div>
                                 <div class="col-sm-12 col-md-4">
-                                    <a class="lightbox" href="{{ url('/storage/') }}/{{ $item->gallery3 }}">
-                                        <img src="{{ url('/storage/') }}/{{ $item->gallery3 }}">
+                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery3 }}">
+                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery3 }}">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ url('/storage/') }}/{{ $item->gallery4 }}">
-                                        <img src="{{ url('/storage/') }}/{{ $item->gallery4 }}">
+                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery4 }}">
+                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery4 }}">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ url('/storage/') }}/{{ $item->gallery5 }}">
-                                        <img src="{{ url('/storage/') }}/{{ $item->gallery5 }}">
+                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery5 }}">
+                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery5 }}">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ url('/storage/') }}/{{ $item->gallery6 }}">
-                                        <img src="{{ url('/storage/') }}/{{ $item->gallery6 }}">
+                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery6 }}">
+                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery6 }}">
                                     </a>
                                 </div>
                             </div>
@@ -398,7 +401,7 @@
                                     @foreach ($bank as $item)
                                     <div class="column lg-6 tab-12">
                                         <h4>{{ $item->name }}</h4>
-                                        <img src="{{ url('/storage/') }}/{{ $item->logo }}" style="height:30px; widht:auto;">
+                                        <img src="{{ Storage::url('bank') }}/{{ $item->logo }}" style="height:30px; widht:auto;">
                                         <p class="desc">
                                             {{ $item->acc_number }}
                                             <br>a/n {{ $item->acc_name }}
@@ -433,7 +436,16 @@
                     <path d="M7.5 1.5l.354-.354L7.5.793l-.354.353.354.354zm-.354.354l4 4 .708-.708-4-4-.708.708zm0-.708l-4 4 .708.708 4-4-.708-.708zM7 1.5V14h1V1.5H7z" fill="currentColor"></path>
                 </svg>
             </a>
+            <!-- Audio Button -->
         </div> <!-- end ss-go-top -->
+        <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
+            <i class="fa-solid fa-circle-pause"></i>
+        </button> -->
+
+        <audio hidden autoplay loop>
+            <source src="{{ Storage::url('music') }}/{{ $music->file }}" type="audio/mpeg">
+            Browsermu tidak mendukung tag audio, upgrade donk!
+        </audio>
 
     </section> <!-- end s-details -->
 
@@ -442,6 +454,7 @@
     ================================================== -->
     <script src="assets/undangan/js/plugins.js"></script>
     <script src="assets/undangan/js/main.js"></script>
+    <script src="assets/undangan/js/app.js"></script>
     <Script>
         (function(html) {
 
@@ -452,7 +465,7 @@
             const cfg = {
 
                 // Countdown Timer Final Date
-                finalDate: 'November 5, 2050 08:00:00',
+                finalDate: Date.parse('{{ $timeAkad->date }}'),
                 // MailChimp URL
                 mailChimpURL: 'https://facebook.us1.list-manage.com/subscribe/post?u=1abf75f6981256963a47d197a&amp;id=37c6d8f4d6'
 

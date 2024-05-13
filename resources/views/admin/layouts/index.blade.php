@@ -6,8 +6,8 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>@yield('title') | {{ config('app.name') }}</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta content="Wedding Fauzi" name="description">
+  <meta content="Wedding.fauzi-abdilah.my.id" name="keywords">
 
   <!-- Favicons -->
   <link href="{{ URL::asset('assets/ui/img/favicon.png') }}" rel="icon">

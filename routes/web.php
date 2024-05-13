@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvitationsController;
+use App\Http\Controllers\MusicController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeddingController;
@@ -49,5 +50,6 @@ Route::post('/redaksi_store', [InvitationsController::class, 'redaksiStore'])->n
 Route::put('/redaksi_update/{id}', [InvitationsController::class, 'redaksiUpdate'])->name('redaksi.update');
 Route::post('/change-password', [UserController::class, 'changePasswordSave'])->name('postChangePassword');
 Route::post('/thanks_store', [WishesController::class, 'thankStore'])->name('thankStore');
+Route::resource('/admin/music', MusicController::class);
 
 Auth::routes();
