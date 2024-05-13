@@ -50,11 +50,22 @@
                                     <td class="text-center">{{ $data->child }}</td>
                                     <td class="text-center">{{ $data->name_father }}</td>
                                     <td class="text-center">{{ $data->name_mother }}</td>
-                                    <td class="text-center">{{ $data->instagram }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ $data->instagram }}" target="_blank">
+                                            <span class="badge rounded text-dark bg-info-light">
+                                                click to instagram
+                                            </span>
+                                        </a>
+                                    </td>
                                     <td class="text-center">{{ $data->bank->name }}</td>
                                     <td class="text-center">{{ $data->acc_name }}</td>
                                     <td class="text-center">{{ $data->acc_number }}</td>
-                                    <td class="text-center">{{ $data->gender }}</td>
+                                    <td class="text-center">
+                                        @if ($data->gender == "Male")
+                                        Laki - Laki
+                                        @else
+                                        Perempuan
+                                        @endif</td>
                                     <td class="text-center">
                                         <a href="{{ Storage::url('bride/') }}{{ $data->photo }}" target="_blank">
                                             <img src="{{ Storage::url('bride/') }}{{ $data->photo }}" height="50px" />
@@ -113,11 +124,23 @@
                                     <td class="text-center">{{ $data->child }}</td>
                                     <td class="text-center">{{ $data->name_father }}</td>
                                     <td class="text-center">{{ $data->name_mother }}</td>
-                                    <td class="text-center">{{ $data->instagram }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ $data->instagram }}" target="_blank">
+                                            <span class="badge rounded text-dark bg-info-light">
+                                                click to instagram
+                                            </span>
+                                        </a>
+                                    </td>
                                     <td class="text-center">{{ $data->bank->name }}</td>
                                     <td class="text-center">{{ $data->acc_name }}</td>
                                     <td class="text-center">{{ $data->acc_number }}</td>
-                                    <td class="text-center">{{ $data->gender }}</td>
+                                    <td class="text-center">
+                                        @if ($data->gender == "Male")
+                                        Laki - Laki
+                                        @else
+                                        Perempuan
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ Storage::url('bride/') }}{{ $data->photo }}" target="_blank">
                                             <img src="{{ Storage::url('bride/') }}{{ $data->photo }}" height="50px" />
@@ -150,20 +173,26 @@
                 <h5 class="modal-title" id="myModalLabel">Form Add Pengantin</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('bride.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('bride.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="formrow-firstname-input" class="form-label">Nama Pengantin</label>
-                                <input name="name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name') }}" placeholder="Mas Fulan">
+                                <label for="validationCustom02" class="form-label">Nama Pengantin</label>
+                                <input name="name" type="text" class="form-control" id="validationCustom02" value="{{ old('name') }}" placeholder="Mas Fulan" required>
+                                <div class="invalid-feedback">
+                                    Nama Pengantin tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Anak Dari</label>
-                                <input name="child" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('child') }}" placeholder="Putra Pertama dari">
+                                <input name="child" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('child') }}" placeholder="Putra Pertama dari" required>
+                                <div class="invalid-feedback">
+                                    Anak dari tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -171,32 +200,47 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nama Bapak</label>
-                                <input name="name_father" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_father') }}" placeholder="Bapak Sambo">
+                                <input name="name_father" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_father') }}" required placeholder="Bapak Sambo">
+                                <div class="invalid-feedback">
+                                    Nama Bapak tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nama Ibu</label>
-                                <input name="name_mother" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_mother') }}" placeholder="Ibu Megawati">
+                                <input name="name_mother" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_mother') }}" required placeholder="Ibu Megawati">
+                                <div class="invalid-feedback">
+                                    Nama Ibu tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="formrow-firstname-input" class="form-label">Instagram</label>
-                                <input name="instagram" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('instagram') }}" placeholder="https://instagram.com/ferdi.samboo">
+                                <label for="formrow-firstname-input" class="form-label">Username Instagram</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    <input name="instagram" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('instagram') }}" required placeholder="ferdi.samboo">
+                                    <div class="invalid-feedback">
+                                        Username Instagram tidak boleh kosong
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Bank</label>
-                                <select name="bank_id" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected> --- Pilih Bank ---</option>
+                                <select name="bank_id" class="form-select" id="formrow-firstname-input" required>
+                                    <option selected disabled value=""> --- Pilih Bank ---</option>
                                     @foreach ($bank as $data)
                                     <option value="{{ $data->id }}">{{ $data->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    Bank tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -204,13 +248,19 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nama Rekening</label>
-                                <input name="acc_name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('acc_name') }}" placeholder="Fulan">
+                                <input name="acc_name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('acc_name') }}" required placeholder="Fulan">
+                                <div class="invalid-feedback">
+                                    Nama Rekening tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nomor Rekening</label>
-                                <input name="acc_number" type="number" class="form-control" id="formrow-firstname-input" value="{{ old('acc_number') }}" placeholder="091234124">
+                                <input name="acc_number" type="number" class="form-control" id="formrow-firstname-input" value="{{ old('acc_number') }}" required placeholder="091234124">
+                                <div class="invalid-feedback">
+                                    Nomor Rekening tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -218,11 +268,14 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Jenis Kelamin</label>
-                                <select name="gender" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected>---Pilih Jenis Kelamin ---</option>
+                                <select name="gender" class="form-select" id="formrow-firstname-input" required>
+                                    <option selected disabled value="">---Pilih Jenis Kelamin ---</option>
                                     <option value="Male">Laki - Laki</option>
                                     <option value="Female">Perempuan</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    Jenis Kelamin tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -295,7 +348,7 @@
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Bank</label>
                                 <select name="bank_id" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected> --- Pilih Bank ---</option>
+                                    <option selected disabled value=""> --- Pilih Bank ---</option>
                                     @foreach ($bank as $item)
                                     <option value="{{ $item->id }}" {{ $item->id == $data->bank_id ? 'selected' : '' }}>{{ $item->name }}</option>
                                     @endforeach
@@ -322,7 +375,7 @@
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Jenis Kelamin</label>
                                 <select name="gender" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected>---Pilih Jenis Kelamin ---</option>
+                                    <option selected disabled value="">---Pilih Jenis Kelamin ---</option>
                                     <option value="Male" {{ "Male" == $data->gender ? 'selected' : '' }}>Laki - Laki</option>
                                     <option value="Female" {{ "Female" == $data->gender ? 'selected' : '' }}>Perempuan</option>
                                 </select>
@@ -361,7 +414,7 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
+                        <p> Apakah Sdr. {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -386,20 +439,26 @@
                 <h5 class="modal-title" id="myModalLabel">Form Add Pengantin</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('bride.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('bride.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="formrow-firstname-input" class="form-label">Nama Pengantin</label>
-                                <input name="name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name') }}" placeholder="Mas Fulan">
+                                <label for="validationCustom02" class="form-label">Nama Pengantin</label>
+                                <input name="name" type="text" class="form-control" id="validationCustom02" value="{{ old('name') }}" placeholder="Mas Fulan" required>
+                                <div class="invalid-feedback">
+                                    Nama Pengantin tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Anak Dari</label>
-                                <input name="child" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('child') }}" placeholder="Putra Pertama dari">
+                                <input name="child" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('child') }}" placeholder="Putra Pertama dari" required>
+                                <div class="invalid-feedback">
+                                    Anak dari tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -407,32 +466,47 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nama Bapak</label>
-                                <input name="name_father" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_father') }}" placeholder="Bapak Sambo">
+                                <input name="name_father" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_father') }}" required placeholder="Bapak Sambo">
+                                <div class="invalid-feedback">
+                                    Nama Bapak tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nama Ibu</label>
-                                <input name="name_mother" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_mother') }}" placeholder="Ibu Megawati">
+                                <input name="name_mother" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('name_mother') }}" required placeholder="Ibu Megawati">
+                                <div class="invalid-feedback">
+                                    Nama Ibu tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="formrow-firstname-input" class="form-label">Instagram</label>
-                                <input name="instagram" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('instagram') }}" placeholder="https://instagram.com/ferdi.samboo">
+                                <label for="formrow-firstname-input" class="form-label">Username Instagram</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    <input name="instagram" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('instagram') }}" required placeholder="ferdi.samboo">
+                                    <div class="invalid-feedback">
+                                        Username Instagram tidak boleh kosong
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Bank</label>
-                                <select name="bank_id" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected> --- Pilih Bank ---</option>
+                                <select name="bank_id" class="form-select" id="formrow-firstname-input" required>
+                                    <option selected disabled value=""> --- Pilih Bank ---</option>
                                     @foreach ($bank as $data)
                                     <option value="{{ $data->id }}">{{ $data->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    Bank tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -440,13 +514,19 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nama Rekening</label>
-                                <input name="acc_name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('acc_name') }}" placeholder="Fulan">
+                                <input name="acc_name" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('acc_name') }}" required placeholder="Fulan">
+                                <div class="invalid-feedback">
+                                    Nama Rekening tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Nomor Rekening</label>
-                                <input name="acc_number" type="number" class="form-control" id="formrow-firstname-input" value="{{ old('acc_number') }}" placeholder="091234124">
+                                <input name="acc_number" type="number" class="form-control" id="formrow-firstname-input" value="{{ old('acc_number') }}" required placeholder="091234124">
+                                <div class="invalid-feedback">
+                                    Nomor Rekening tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -454,11 +534,14 @@
                         <div class="col-lg-6">
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Jenis Kelamin</label>
-                                <select name="gender" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected>---Pilih Jenis Kelamin ---</option>
+                                <select name="gender" class="form-select" id="formrow-firstname-input" required>
+                                    <option selected disabled value="">---Pilih Jenis Kelamin ---</option>
                                     <option value="Male">Laki - Laki</option>
                                     <option value="Female">Perempuan</option>
                                 </select>
+                                <div class="invalid-feedback">
+                                    Jenis Kelamin tidak boleh kosong
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -531,7 +614,7 @@
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Bank</label>
                                 <select name="bank_id" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected> --- Pilih Bank ---</option>
+                                    <option selected disabled value=""> --- Pilih Bank ---</option>
                                     @foreach ($bank as $item)
                                     <option value="{{ $item->id }}" {{ $item->id == $data->bank_id ? 'selected' : '' }}>{{ $item->name }}</option>
                                     @endforeach
@@ -558,7 +641,7 @@
                             <div class="mb-3">
                                 <label for="formrow-firstname-input" class="form-label">Jenis Kelamin</label>
                                 <select name="gender" class="form-control" id="formrow-firstname-input">
-                                    <option disabled selected>---Pilih Jenis Kelamin ---</option>
+                                    <option selected disabled value="">---Pilih Jenis Kelamin ---</option>
                                     <option value="Male" {{ "Male" == $data->gender ? 'selected' : '' }}>Laki - Laki</option>
                                     <option value="Female" {{ "Female" == $data->gender ? 'selected' : '' }}>Perempuan</option>
                                 </select>
@@ -586,7 +669,7 @@
 <!-- start modal Delete -->
 @foreach ($bride as $data)
 <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-delete-{{ $data->id }}">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">Form Delete Data Pengantin</h5>
@@ -597,7 +680,7 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
+                        <p> Apakah Sdr. {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
                     </div>
                 </div>
                 <div class="modal-footer">

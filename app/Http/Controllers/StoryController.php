@@ -6,6 +6,7 @@ use App\Models\Story;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StoryController extends Controller
 {
@@ -38,7 +39,8 @@ class StoryController extends Controller
         Story::create(array_merge($request->all(), [
             'wedding_id' => $wedding_id->id
         ]));
-        return redirect()->back()->with('success', 'Data Created Successfully!');
+        Alert::success('success', 'Data Created Successfully!');
+        return redirect()->back();
     }
     
     public function show(Story $story)
@@ -50,12 +52,14 @@ class StoryController extends Controller
     {
         $story = Story::findOrFail($id);
         $story->update($request->all());
-        return redirect()->back()->with('success', 'Data Updated Successfully!');
+        Alert::success('success', 'Data Updated Successfully!');
+        return redirect()->back();
     }
     
     public function destroy(Story $story)
     {
         $story->delete();
-        return redirect()->back()->with('success', 'Data Deleted Successfully!');
+        Alert::success('success', 'Data Deleted Successfully!');
+        return redirect()->back();
     }
 }

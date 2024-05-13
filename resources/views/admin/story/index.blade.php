@@ -84,20 +84,29 @@
                 <h5 class="modal-title" id="myModalLabel">Form Add Story</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('story.store') }}" method="POST">
+            <form action="{{ route('story.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="formrow-firstname-input" class="form-label">Tanggal</label>
-                        <input name="tanggal" type="date" class="form-control" id="formrow-firstname-input" value="{{ old('tanggal') }}">
+                        <input name="tanggal" type="date" class="form-control" id="formrow-firstname-input" value="{{ old('tanggal') }}" required>
+                        <div class="invalid-feedback">
+                            Tanggal Tidak Boleh Kosong!
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('judul') }}">
+                        <label for="formrow-firstname-input" class="form-label">Judul Cerita</label>
+                        <input name="judul" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('judul') }}" required>
+                        <div class="invalid-feedback">
+                            Judul Cerita Tidak Boleh Kosong!
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">isi</label>
-                        <textarea rows="4" cols="4" name="isi" class="form-control" id="formrow-firstname-input"></textarea>
+                        <label for="formrow-firstname-input" class="form-label">Isi Cerita</label>
+                        <textarea rows="4" cols="4" name="isi" class="form-control" id="formrow-firstname-input" required></textarea>
+                        <div class="invalid-feedback">
+                            Isi Cerita Tidak Boleh Kosong!
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -150,7 +159,7 @@
 <!-- start modal Delete -->
 @foreach ($stories as $data)
 <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-delete-{{ $data->id }}">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">Form Delete Story</h5>
@@ -161,7 +170,7 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->judul }}</b>? </p>
+                        <p> Apakah Sdr. {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->judul }}</b>? </p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -227,20 +236,29 @@
                 <h5 class="modal-title" id="myModalLabel">Form Add Story</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('story.store') }}" method="POST">
+            <form action="{{ route('story.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="formrow-firstname-input" class="form-label">Tanggal</label>
-                        <input name="tanggal" type="date" class="form-control" id="formrow-firstname-input" value="{{ old('tanggal') }}">
+                        <input name="tanggal" type="date" class="form-control" id="formrow-firstname-input" value="{{ old('tanggal') }}" required>
+                        <div class="invalid-feedback">
+                            Tanggal Tidak Boleh Kosong!
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('judul') }}">
+                        <label for="formrow-firstname-input" class="form-label">Judul Cerita</label>
+                        <input name="judul" type="text" class="form-control" id="formrow-firstname-input" value="{{ old('judul') }}" required>
+                        <div class="invalid-feedback">
+                            Judul Cerita Tidak Boleh Kosong!
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">isi</label>
-                        <textarea rows="4" cols="4" name="isi" class="form-control" id="formrow-firstname-input"></textarea>
+                        <label for="formrow-firstname-input" class="form-label">Isi Cerita</label>
+                        <textarea rows="4" cols="4" name="isi" class="form-control" id="formrow-firstname-input" required></textarea>
+                        <div class="invalid-feedback">
+                            Isi Cerita Tidak Boleh Kosong!
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -259,7 +277,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Edit Wishes</h5>
+                <h5 class="modal-title" id="myModalLabel">Form Edit Story</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('story.update', $data->id) }}" method="POST">
@@ -304,7 +322,7 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->judul }}</b>? </p>
+                        <p> Apakah Sdr .{{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->judul }}</b>? </p>
                     </div>
                 </div>
                 <div class="modal-footer">

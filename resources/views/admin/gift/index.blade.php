@@ -57,25 +57,33 @@
                     @else
                     @if ($gift === null)
                     <!-- General Form Elements -->
-                    <form method="POST" action="{{ route('gift.store') }}" autocomplete="false">
+                    <form method="POST" action="{{ route('gift.store') }}" autocomplete="false" class="needs-validation" novalidate>
                         @csrf
-                        @method('PUT')
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" autofocus>
+                                <input type="text" class="form-control" required name="name" autofocus>
+                                <div class="invalid-feedback">
+                                    Nama Tidak Boleh Kosong
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputEmail" class="col-sm-2 col-form-label">address</label>
+                            <label for="inputEmail" class="col-sm-2 col-form-label">Alamat</label>
                             <div class="col-sm-10">
-                                <textarea rows="7" cols="7" name="address" class="form-control"></textarea>
+                                <textarea rows="7" cols="7" name="address" class="form-control" required></textarea>
+                                <div class="invalid-feedback">
+                                    Alamat Tidak Boleh Kosong
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="inputText" class="col-sm-2 col-form-label">Maps</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="maps" value="">
+                                <input type="text" class="form-control" required name="maps" value="">
+                                <div class="invalid-feedback">
+                                    Maps Tidak Boleh Kosong
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">

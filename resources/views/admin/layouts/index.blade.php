@@ -49,6 +49,8 @@
   <script src="{{ URL::asset('assets/ui/js/main.js') }}"></script>
 
   @yield('script')
+  @include('sweetalert::alert')
+
 </body>
 
 </html>

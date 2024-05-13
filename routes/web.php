@@ -39,7 +39,7 @@ Route::resource('/admin/bride', BrideController::class)->only(['index', 'store',
 Route::resource('/admin/events', EventController::class)->only(['index', 'update', 'store', 'destroy']);
 Route::resource('/admin/gallery', GalleryController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::get('/admin/wishes', [WishesController::class, 'index'])->name('wishes.index');
-Route::put('/admin/wishes{id}', [WishesController::class, 'thank'])->name('thank');
+Route::put('/thank_update/{id}', [WishesController::class, 'thank'])->name('thank');
 Route::resource('/admin/gift', GiftController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::resource('/admin/user', UserController::class);
 Route::resource('/admin/bank', BankController::class);
@@ -48,5 +48,6 @@ Route::resource('/admin/invitations', InvitationsController::class);
 Route::post('/redaksi_store', [InvitationsController::class, 'redaksiStore'])->name('redaksi.store');
 Route::put('/redaksi_update/{id}', [InvitationsController::class, 'redaksiUpdate'])->name('redaksi.update');
 Route::post('/change-password', [UserController::class, 'changePasswordSave'])->name('postChangePassword');
+Route::post('/thanks_store', [WishesController::class, 'thankStore'])->name('thankStore');
 
 Auth::routes();

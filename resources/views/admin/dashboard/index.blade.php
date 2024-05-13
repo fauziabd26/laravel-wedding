@@ -105,7 +105,7 @@
                             @else
                             <p>Berikut Link Undangan Anda : </p>
                             <a href="{{ route('homeIndex', $linkWedding->name) }}/?to=Bapak%20Sambo" target="_blank">
-                                <p>{{ env('APP_URL') }}undangan/{{$linkWedding->name}}</p>
+                                <p>{{ env('APP_NIKAH_URL') }}undangan/{{$linkWedding->name}}</p>
                             </a> <br />
                             <p>Silahkan kreasikan undanganmu melalui menu yang sudah disediakan</p>
 

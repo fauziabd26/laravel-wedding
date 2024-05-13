@@ -112,7 +112,13 @@
                     <h5 class="card-title">Data Orang Yang Diundang</h5>
                     @if (Auth::user()->is_admin == 0)
                     <div class="col mt-2" style="text-align-last: right;">
+                        @if ($redaksi != null)
                         <button type="button" class="btn btn-primary waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-add"> <i class="bx bx-plus-circle"></i> Tambah Data</button>
+                        @else
+                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm mr-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Silahkan isi redaksi terlebih dahulu"><i class="bx bx-plus-circle"></i>
+                            Tambah Data
+                        </button>
+                        @endif
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -242,7 +248,7 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
+                        <p> Apakah Sdr. {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
                     </div>
                 </div>
                 <div class="modal-footer">

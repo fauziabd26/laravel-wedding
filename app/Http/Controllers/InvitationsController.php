@@ -7,6 +7,7 @@ use App\Models\RedaksiKata;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class InvitationsController extends Controller
 {
@@ -43,7 +44,8 @@ class InvitationsController extends Controller
         $invitation->name       = $request->name;
         $invitation->link       = env('APP_NIKAH_URL') . 'undangan' . '/' . $wedding->name . '?to=' . str_replace(' ', '+', $invitation->name);
         $invitation->save();
-        return redirect()->back()->with('success', 'Data Created Successfully');
+        Alert::success('success', 'Data Created Successfully');
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
@@ -56,14 +58,16 @@ class InvitationsController extends Controller
         $invitation->name       = $request->name;
         $invitation->link       = env('APP_NIKAH_URL') . 'undangan' . '/' . $wedding->name . '?to=' . str_replace(' ', '+', $invitation->name);
         $invitation->update();
-        return redirect()->back()->with('Data Updated Sucessfully');
+        Alert::success('Data Updated Sucessfully');
+        return redirect()->back();
     }
 
     public function destroy($id)
     {
         $invitations = Invitations::findOrFail($id);
         $invitations->delete();
-        return redirect()->back()->with('success', 'Data Deleted Successfully');
+        Alert::success('success', 'Data Deleted Successfully');
+        return redirect()->back();
     }
 
     public function redaksiStore(Request $request)
@@ -72,13 +76,15 @@ class InvitationsController extends Controller
         RedaksiKata::create(array_merge($request->all(), [
             'wedding_id'    => $wedding->id,
         ]));
-        return redirect()->back()->with('sucess', 'Data Created Successfully');
+        Alert::success('sucess', 'Data Created Successfully');
+        return redirect()->back();
     }
 
     public function redaksiUpdate(Request $request, $id)
     {
         $redaksi = RedaksiKata::findOrFail($id);
         $redaksi->update($request->all());
-        return redirect()->back()->with('success', 'Data Updated Successfully');
+        Alert::success('success', 'Data Updated Successfully');
+        return redirect()->back();
     }
 }

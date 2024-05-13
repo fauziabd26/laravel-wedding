@@ -25,18 +25,27 @@
                         <div class="col">
                             <h5 class="card-title">Form Wishes</h5>
                         </div>
-                        <div class="col mt-2" style="text-align-last: right;">
-                            <button type="button" class="btn btn-success waves-effect waves-light btn-sm m-2" data-bs-toggle="modal" data-bs-target="#modal-addThank"> <i class="bi bi-check-circle"></i> Save Form</button>
-                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Notes</label>
-                        <input name="note" type="text" class="form-control" id="formrow-firstname-input" value="Contoh : Ungkapan terima kasih yang sangat tulus dari kami apabila Saudara/i berkenan hadir dan turut memberikan doa restu kepada kami.">
+                        <form action="{{ route('thankStore') }}" method="POST" class="needs-validation" novalidate>
+                            @csrf
+                            <label for="formrow-firstname-input" class="form-label">Notes</label>
+                            <input name="note" type="text" class="form-control" id="formrow-firstname-input" required>
+                            <div class="invalid-feedback">
+                                Notes tidak boleh kosong!
+                            </div>
+                            <div>
+                                <span class="text-italic"><i class="bi bi-info-circle"></i> "Contoh : Ungkapan terima kasih yang sangat tulus dari kami apabila Saudara/i berkenan hadir dan turut memberikan doa restu kepada kami."</span>
+                            </div>
+                            <div class="col mt-2" style="text-align-last: right;">
+                                <button type="submit" class="btn btn-success waves-effect waves-light btn-sm m-2"> <i class="bi bi-check-circle"></i> Save Form</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     @else
     <div class="row">
         @foreach ($thanks as $data)

@@ -6,6 +6,7 @@ use App\Models\Detail;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EventController extends Controller
 {
@@ -37,14 +38,23 @@ class EventController extends Controller
         Detail::create(array_merge($request->all(),[
             'wedding_id' => $wedding->id,
         ]));
-        return redirect()->back()->with('success', 'Data Created Successfully');
+        Alert::success('Success', 'Data Created Successfully');
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
     {
         $events = Detail::findOrFail($id);
         $events->update($request->all());
+        Alert::success('Success', 'Data Updated Successfully');
+        return redirect()->back();
+    }
 
-        return redirect()->back()->with('message', 'Data Updated Successfully');
+    public function destroy($id)
+    {
+        $events = Detail::findOrFail($id);
+        $events->delete();
+        Alert::success('Success', 'Data Deleted Successfully');
+        return redirect()->back();
     }
 }

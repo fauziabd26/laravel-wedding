@@ -8,6 +8,7 @@ use App\Models\Wedding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BrideController extends Controller
 {
@@ -46,12 +47,15 @@ class BrideController extends Controller
                 'wedding_id' => $wedding->id,
                 'photo'      => $photo->getClientOriginalName()
             ]));
+            Alert::success('Success', 'Data Created Successfully');
         } else {
             Bride::create(array_merge($request->all(), [
                 'wedding_id' => $wedding->id,
+                'instagram' => 'https://www.instagram.com/' . $request->instagram,
             ]));
+            Alert::success('Success', 'Data Created Successfully');
         }
-        return redirect()->route('bride.index')->with('success', 'Data Updated Successfully');
+        return redirect()->back();
     }
 
     public function update(Request $request, string $id)
@@ -64,10 +68,12 @@ class BrideController extends Controller
             $bride->update(array_merge($request->all(), [
                 'photo'      => $photo->getClientOriginalName(),
             ]));
-            return redirect()->back()->with('success', 'Data Success Updated');
+            Alert::success('Success!', 'Data Updated Successfully');
+            return redirect()->back();
         } else {
             $bride->update($request->all());
-            return redirect()->back()->with('success', 'Data Success Updated');
+            Alert::success('Success!', 'Data Updated Successfully');
+            return redirect()->back();
         }
     }
 
@@ -75,6 +81,7 @@ class BrideController extends Controller
     {
         $bride = Bride::findOrFail($id);
         $bride->delete();
-        return redirect()->back()->with('success', 'Data Deleted Successfully');
+        alert()->success('Success!', 'Data Deleted Successfully');
+        return redirect()->back();
     }
 }

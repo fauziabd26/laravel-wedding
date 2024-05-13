@@ -6,6 +6,7 @@ use App\Models\Galery;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GalleryController extends Controller
 {
@@ -82,20 +83,23 @@ class GalleryController extends Controller
                 'wedding_id' => $wedding->id,
             ]));
         }
-        return redirect()->back()->with('success', 'Data Created Successfully');
+        Alert::success('Success', 'Data Created Successfully');
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
     {
         $gallery = Galery::findOrFail($id);
         $gallery->update($request->all());
-        return redirect()->back()->with('message', 'Data Updated Successfully');
+        Alert::success('Success', 'Data Updated Successfully');
+        return redirect()->back();
     }
 
     public function delete($id)
     {
         $gallery = Galery::findOrFail($id);
         $gallery->delete();
-        return redirect()->back()->with('message', 'Data Deleted Successfully');
+        Alert::success('Success', 'Data Deleted Successfully');
+        return redirect()->back();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class WeddingController extends Controller
 {
@@ -29,7 +30,8 @@ class WeddingController extends Controller
             'status'    => 1,
             'user_id'   => Auth::user()->id
         ]));
-        return redirect()->back()->with('success', 'Data Created Successfully');
+        Alert::success('Success!', 'Data Created Successfully');
+        return redirect()->back();
     }
 
     public function update(Request $request, string $id)
@@ -37,6 +39,7 @@ class WeddingController extends Controller
         $wedding = Wedding::findOrFail($id);
         $wedding->update($request->all());
 
-        return redirect()->route('wedding.index')->with(['message' => 'Wedding updated successfully'], 201);
+        Alert::success('Success!', 'Data Updated successfully');
+        return redirect()->back();
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Wedding;
 use App\Models\Wishes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class WishesController extends Controller
 {
@@ -36,8 +37,19 @@ class WishesController extends Controller
 
     public function thank(Request $request, $id)
     {
-        $thanks = Thank::with('wedding')->where('wedding_id', Auth::user()->id)->findOrFail($id);
+        $thanks = Thank::findOrFail($id);
         $thanks->update($request->all());
-        return redirect()->back()->with('message', 'Data Updated Successfully');
+        Alert::success('Success!', 'Data Updated Successfully');
+        return redirect()->back();
+    }
+
+    public function thankStore(Request $request)
+    {
+        $wedding = Wedding::where('user_id', Auth::user()->id)->first();
+        Thank::create(array_merge($request->all(),[
+            'wedding_id' => $wedding->id
+        ]));
+        Alert::success('Success!', 'Data Created Successfully');
+        return redirect()->back();
     }
 }

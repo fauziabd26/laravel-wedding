@@ -27,42 +27,42 @@
                         <img src="{{ Storage::url('gallery') }}/{{ $data->gallery1 }}" height="100px" width="auto">
                     </a><br />
                     <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 1</label><br />
-                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery1-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                 </div>
                 <div class="col-lg-2" style="text-align-last: center;">
                     <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $data->gallery2 }}" target="_blank">
                         <img src="{{ Storage::url('gallery') }}/{{ $data->gallery2 }}" height="100px" width="auto">
                     </a><br />
                     <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 2</label><br />
-                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery2-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                 </div>
                 <div class="col-lg-2" style="text-align-last: center;">
                     <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $data->gallery3 }}" target="_blank">
                         <img src="{{ Storage::url('gallery') }}/{{ $data->gallery3 }}" height="100px" width="auto">
                     </a><br />
                     <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 3</label><br />
-                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery3-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                 </div>
                 <div class="col-lg-2" style="text-align-last: center;">
                     <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $data->gallery4 }}" target="_blank">
                         <img src="{{ Storage::url('gallery') }}/{{ $data->gallery4 }}" height="100px" width="auto">
                     </a><br />
                     <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 4</label><br />
-                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery4-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                 </div>
                 <div class="col-lg-2" style="text-align-last: center;">
                     <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $data->gallery5 }}" target="_blank">
                         <img src="{{ Storage::url('gallery') }}/{{ $data->gallery5 }}" height="100px" width="auto">
                     </a><br />
                     <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 5</label><br />
-                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery5-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                 </div>
                 <div class="col-lg-2" style="text-align-last: center;">
                     <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $data->gallery6 }}" target="_blank">
                         <img src="{{ Storage::url('gallery') }}/{{ $data->gallery6 }}" height="100px" width="auto">
                     </a><br />
                     <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 6</label><br />
-                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery6-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                 </div>
             </div>
             @endforeach
@@ -105,42 +105,42 @@
                                 <img src="{{ Storage::url('gallery') }}/{{ $gallery->gallery1 }}" height="100px" width="auto">
                             </a><br />
                             <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 1</label><br />
-                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery1-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                         </div>
                         <div class="col-lg-2" style="text-align-last: center;">
                             <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $gallery->gallery2 }}" target="_blank">
                                 <img src="{{ Storage::url('gallery') }}/{{ $gallery->gallery2 }}" height="100px" width="auto">
                             </a><br />
                             <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 2</label><br />
-                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery2-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                         </div>
                         <div class="col-lg-2" style="text-align-last: center;">
                             <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $gallery->gallery3 }}" target="_blank">
                                 <img src="{{ Storage::url('gallery') }}/{{ $gallery->gallery3 }}" height="100px" width="auto">
                             </a><br />
                             <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 3</label><br />
-                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery3-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                         </div>
                         <div class="col-lg-2" style="text-align-last: center;">
                             <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $gallery->gallery4 }}" target="_blank">
                                 <img src="{{ Storage::url('gallery') }}/{{ $gallery->gallery4 }}" height="100px" width="auto">
                             </a><br />
                             <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 4</label><br />
-                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery4-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                         </div>
                         <div class="col-lg-2" style="text-align-last: center;">
                             <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $gallery->gallery5 }}" target="_blank">
                                 <img src="{{ Storage::url('gallery') }}/{{ $gallery->gallery5 }}" height="100px" width="auto">
                             </a><br />
                             <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 5</label><br />
-                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery5-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                         </div>
                         <div class="col-lg-2" style="text-align-last: center;">
                             <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $gallery->gallery6 }}" target="_blank">
                                 <img src="{{ Storage::url('gallery') }}/{{ $gallery->gallery6 }}" height="100px" width="auto">
                             </a><br />
                             <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 6</label><br />
-                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
+                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-gallery6-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Photo</button>
                         </div>
                     </div>
                 </div>
@@ -149,8 +149,8 @@
                         <div class="col-lg-2" style="text-align-last: center;">
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="{{ $gallery->video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Photo 3</label><br />
-                                <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Video</button>
+                                <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Video</label><br />
+                                <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#modal-edit-video-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit Video</button>
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
 
 @if ($gallery != null && Auth::user()->is_admin == 0)
 <!-- start modal edit -->
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-{{ $gallery->id }}">
+<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-gallery1-{{ $gallery->id }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -177,7 +177,151 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="formrow-firstname-input" class="form-label">Ganti Foto</label>
-                        <input name="gallery" type="file" class="form-control" id="formrow-firstname-input">
+                        <input name="gallery1" type="file" class="form-control" id="formrow-firstname-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-gallery2-{{ $gallery->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Ganti Foto</label>
+                        <input name="gallery2" type="file" class="form-control" id="formrow-firstname-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-gallery3-{{ $gallery->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Ganti Foto</label>
+                        <input name="gallery3" type="file" class="form-control" id="formrow-firstname-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-gallery4-{{ $gallery->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Ganti Foto</label>
+                        <input name="gallery4" type="file" class="form-control" id="formrow-firstname-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-gallery5-{{ $gallery->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Ganti Foto</label>
+                        <input name="gallery5" type="file" class="form-control" id="formrow-firstname-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-gallery6-{{ $gallery->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Ganti Foto</label>
+                        <input name="gallery6" type="file" class="form-control" id="formrow-firstname-input">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-video-{{ $gallery->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Form Edit Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formrow-firstname-input" class="form-label">Ganti Url Video</label>
+                        <input name="video" type="text" value="{{ $gallery->video }}" class="form-control" id="formrow-firstname-input">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -227,7 +371,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="formrow-password-input" class="form-label">Video</label>
-                        <input type="text" name="video" class="form-control" id="formrow-password-input">
+                        <input type="text" name="video" class="form-control" id="formrow-password-input" placeholder="https://youtoube.com/blabla">
                     </div>
                 </div>
                 <div class="modal-footer">

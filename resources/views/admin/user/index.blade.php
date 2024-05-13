@@ -317,7 +317,7 @@
                 @method('DELETE')
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p> Apakah {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
+                        <p> Apakah Sdr. {{ auth()->user()->name }} ingin menghapus data <b class="text-uppercase">{{ $data->name }}</b>? </p>
                     </div>
                 </div>
                 <div class="modal-footer">
