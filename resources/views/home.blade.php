@@ -58,9 +58,10 @@
 
         <div class="s-intro__slider swiper-container">
             <div class="swiper-wrapper">
-                <div class="s-intro__slide swiper-slide" style="background-image: url('/storage/hero-1.jpeg');"></div>
-                <div class="bg-opacity-50 s-intro__slide swiper-slide" style="background-image: url('/storage/hero-2.jpeg');"></div>
-                <div class="s-intro__slide swiper-slide bg-opacity-10" style="background-image: url('/storage/hero-3.jpeg');"></div>
+                <div class="s-intro__slide swiper-slide" style="background-image: url(isset({{ Storage::url('gallery') }}/{{ $bgImage->gallery1 }}) ? asset({{ Storage::url('gallery') }}/{{ $bgImage->gallery1 }}) : asset('assets/ui/img/profile-img.jpg'));"></div>
+                <!-- <div class="s-intro__slide swiper-slide" style="background-image: url({{ isset(Auth::user()->photo) ? asset(Auth::user()->photo) : asset('assets/ui/img/profile-img.jpg') }});"></div> -->
+                <!-- <div class="bg-opacity-50 s-intro__slide swiper-slide" style="background-image: url({{ Storage::url('gallery') }}/{{ $bgImage->gallery2 }});"></div> -->
+                <!-- <div class="s-intro__slide swiper-slide bg-opacity-10" style="background-image: url({{ Storage::url('gallery') }}/{{ $bgImage->gallery3 }});"></div> -->
             </div>
         </div>
 
@@ -444,10 +445,13 @@
             <i class="fa-solid fa-circle-pause"></i>
         </button> -->
 
-        <audio hidden autoplay loop>
+        <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio>
+        <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a>
+
+        <!-- <audio hidden autoplay loop>
             <source src="{{ Storage::url('music') }}/{{ $music->file }}" type="audio/mpeg">
             Browsermu tidak mendukung tag audio, upgrade donk!
-        </audio>
+        </audio> -->
         @endif
 
     </section> <!-- end s-details -->

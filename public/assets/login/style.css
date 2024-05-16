@@ -65,10 +65,15 @@ body{
     border-color: #fff;
 }
 
+.container button.green{
+    background-color: darkseagreen;
+    border-color: #fff;
+}
+
 .container form{
     background-color: #fff;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     flex-direction: column;
     padding: 0 40px;
@@ -207,4 +212,11 @@ body{
 
 .container.active .toggle-right{
     transform: translateX(200%);
+}
+
+.text-danger,
+.text-danger-all *,
+.text-danger-all *:before,
+.text-danger-all *:after {
+    color: #fc544b !important;
 }

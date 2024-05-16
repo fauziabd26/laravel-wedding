@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BrideController;
 use App\Http\Controllers\DashboardController;
@@ -51,5 +52,6 @@ Route::put('/redaksi_update/{id}', [InvitationsController::class, 'redaksiUpdate
 Route::post('/change-password', [UserController::class, 'changePasswordSave'])->name('postChangePassword');
 Route::post('/thanks_store', [WishesController::class, 'thankStore'])->name('thankStore');
 Route::resource('/admin/music', MusicController::class);
+Route::resource('/admin/attachment', AttachmentController::class);
 
 Auth::routes();

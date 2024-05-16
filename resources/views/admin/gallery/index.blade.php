@@ -339,35 +339,47 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Tambah Foto</h5>
+                <h5 class="modal-title" id="myModalLabel">Form Tambah Foto <span class="text-danger">(Upload Foto min. 3)</span></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('gallery.store',) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('gallery.store',) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="formrow-firstname-input" class="form-label">Photo 1</label>
-                        <input type="file" name="gallery1" class="form-control" id="formrow-firstname-input">
+                        <input type="file" name="gallery1" class="form-control" id="formrow-firstname-input" required>
+                        <div class="invalid-feedback">
+                            Photo Tidak Boleh Kosong!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="formrow-child-input" class="form-label">Photo 2</label>
-                        <input type="file" name="gallery2" class="form-control" id="formrow-child-input">
+                        <input type="file" name="gallery2" class="form-control" id="formrow-child-input" required>
+                        <div class="invalid-feedback">
+                            Photo Tidak Boleh Kosong!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="formrow-password-input" class="form-label">Photo 3</label>
-                        <input type="file" name="gallery3" class="form-control" id="formrow-child-input">
+                        <input type="file" name="gallery3" class="form-control" id="formrow-child-input" required>
+                        <div class="invalid-feedback">
+                            Photo Tidak Boleh Kosong!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="formrow-password-input" class="form-label">Photo 4</label>
                         <input type="file" name="gallery4" class="form-control" id="formrow-password-input">
+                        
                     </div>
                     <div class="mb-3">
                         <label for="formrow-password-input" class="form-label">Photo 5</label>
                         <input type="file" name="gallery5" class="form-control" id="formrow-password-input">
+                        
                     </div>
                     <div class="mb-3">
                         <label for="formrow-password-input" class="form-label">Photo 6</label>
                         <input type="file" name="gallery6" class="form-control" id="formrow-password-input">
+                        
                     </div>
                     <div class="mb-3">
                         <label for="formrow-password-input" class="form-label">Video</label>

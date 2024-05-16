@@ -31,7 +31,7 @@
         <div class="form-container sign-in">
             <form action="{{ route('login') }}" method="POST">
                 @csrf
-                <h1>Log In</h1>
+                <h1 style="text-align: center;">Log In</h1>
                 <!-- <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
@@ -40,9 +40,22 @@
                 </div>
                 <span>or use your email password</span> -->
                 <input type="email" name="email" required class="@error('email') is-invalid @enderror" value="{{ old('email') }}" autofocus placeholder="Email">
-                <input type="password" name="password" class="@error('password') is-invalid @enderror" placeholder="Password">
-                <!-- <a href="#">Forget Your Password?</a> -->
+                <div class="text-danger">
+                    @error('email')
+                    {{ $message }}
+                    @enderror
+                </div>
+                <input type="password" id="passwordKu" name="password" class="@error('password') is-invalid @enderror" placeholder="Password">
+                <div class="text-danger">
+                    @error('password')
+                    {{ $message }}
+                    @enderror
+                </div>
+                <!-- <input type="checkbox" onclick="showHide()"> Tampilkan Password -->
+                <a href="#" class="col-form-label col-sm-2 pt-0" onclick="showHide()"> <i class="fa fa-eye"></i>
+                    Tampilkan Password</a>
                 <button type="submit">Sign In</button>
+                <a href="#">Forget Your Password?</a>
             </form>
         </div>
         <div class="toggle-container">
@@ -62,6 +75,16 @@
     </div>
 
     <script src="{{('/assets/login/script.js')}}"></script>
+    <script>
+        function showHide() {
+            var inputan = document.getElementById("passwordKu");
+            if (inputan.type === "password") {
+                inputan.type = "text";
+            } else {
+                inputan.type = "password";
+            }
+        }
+    </script>
 </body>
 
 </html>

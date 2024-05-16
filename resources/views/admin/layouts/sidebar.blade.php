@@ -41,7 +41,7 @@
      </li>
 
      <li class="nav-item">
-       <a class="nav-link {{ request()->is('admin/gallery') ? '' : 'collapsed' }}" href="{{ route('gallery.index') }}">
+       <a class="nav-link {{ request()->is('admin/attachment') ? '' : 'collapsed' }}" href="{{ route('attachment.index') }}">
          <i class="bx bxs-photo-album"></i>
          <span>Galeri</span>
        </a>
