@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ ('/assets/login/style.css') }}">
     <title>Login | {{ config('app.name') }}</title>
 </head>
@@ -54,7 +55,9 @@
                 <!-- <input type="checkbox" onclick="showHide()"> Tampilkan Password -->
                 <a href="#" class="col-form-label col-sm-2 pt-0" onclick="showHide()"> <i class="fa fa-eye"></i>
                     Tampilkan Password</a>
-                <button type="submit">Sign In</button>
+                <div style="margin:3em">
+                    <button type="submit" class="btn btn-primary btn-lg" id="load2" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Loading...">Sign In</button>
+                </div>
                 <a href="#">Forget Your Password?</a>
             </form>
         </div>
@@ -75,6 +78,8 @@
     </div>
 
     <script src="{{('/assets/login/script.js')}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
         function showHide() {
             var inputan = document.getElementById("passwordKu");
@@ -84,6 +89,15 @@
                 inputan.type = "password";
             }
         }
+    </script>
+    <script>
+        $('.btn').on('click', function() {
+            var $this = $(this);
+            $this.button('loading');
+            setTimeout(function() {
+                $this.button('reset');
+            }, 8000);
+        });
     </script>
 </body>
 
