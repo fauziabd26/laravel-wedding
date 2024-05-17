@@ -33,13 +33,13 @@
             <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <h1 style="text-align: center;">Log In</h1>
-                <!-- <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <div class="social-icons">
+                    <a href="/login/google" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="/login/facebook" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="/login/github" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <!-- <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a> -->
                 </div>
-                <span>or use your email password</span> -->
+                <span>or use your email password</span>
                 <input type="email" name="email" required class="@error('email') is-invalid @enderror" value="{{ old('email') }}" autofocus placeholder="Email">
                 <div class="text-danger">
                     @error('email')

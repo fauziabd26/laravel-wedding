@@ -29,7 +29,7 @@ class User extends Authenticatable
         'name', 'fullname', 'email', 'password', 'about',
         'company', 'job', 'country', 'address', 'phone',
         'twitter_link', 'facebook_link', 'instagram_link', 'linkedin_link', 'photo',
-        'role_id','last_seen', 'is_admin'
+        'role_id','last_seen', 'is_admin','google_id',
     ];
 
     /**
@@ -52,4 +52,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function socialAccounts()
+    {
+        return $this->hasMany(SocialAccount::class);
+    }
 }

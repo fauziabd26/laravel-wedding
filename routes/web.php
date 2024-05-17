@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttachmentController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BrideController;
 use App\Http\Controllers\DashboardController;
@@ -53,5 +54,24 @@ Route::post('/change-password', [UserController::class, 'changePasswordSave'])->
 Route::post('/thanks_store', [WishesController::class, 'thankStore'])->name('thankStore');
 Route::resource('/admin/music', MusicController::class);
 Route::resource('/admin/attachment', AttachmentController::class);
+
+// // Untuk redirect ke Google
+// Route::get('login/google/redirect', [SocialiteController::class, 'redirect'])
+//     ->middleware(['guest'])
+//     ->name('redirect');
+
+// // Untuk callback dari Google
+// Route::get('login/google/callback', [SocialiteController::class, 'callback'])
+//     ->middleware(['guest'])
+//     ->name('callback');
+
+// // Untuk logout
+// Route::post('logout', [SocialiteController::class, 'logout'])
+//     ->middleware(['auth'])
+//     ->name('logout');
+
+
+Route::get('/login/{provider}', [SocialiteController::class, 'redirectToProvider']);
+Route::get('/login/{provider}/callback', [SocialiteController::class, 'handleProvideCallback']);
 
 Auth::routes();
