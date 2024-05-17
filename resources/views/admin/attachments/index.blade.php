@@ -126,12 +126,100 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row mt-5 mb-5">
-                        <div class="col-lg-2" style="text-align-last: center;">
+                    <div class="row mt-5 mb-5 justify-content-center">
+                        <div style="text-align-last: center;">
+                            @if ($gallery === null)
+                            <button type="button" class="btn btn-primary waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-addVideo"> <i class="bx bx-plus"></i> Tambah Video</button>
+                            <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-addVideo" data-bs-keyboard="false" data-bs-backdrop="static">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="myModalLabel">Form Tambah Video</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <form action="{{ route('gallery.store',) }}" method="POST" class="needs-validation" novalidate>
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="formrow-firstname-input" class="form-label">Link Video </label>
+                                                    <input type="text" name="video" class="form-control" placeholder="https://www.youtube.com/embed/ZwHgtocmJPk" required />
+                                                    <div class="invalid-feedback">
+                                                        Link Video Wajib Diisi!
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                                </div>
+                                        </form>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                            @else
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" src="{{ isset($gallery->video) ? asset($gallery->video) : '' }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br />
                                 <label for="formrow-firstname-input" class="form-label ml-12 mt-4">Video</label><br />
                             </div>
+                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-editVideo-{{ $gallery->id }}"> <i class="bx bx-pencil"></i> Edit</button>
+                            <button type="button" class="btn btn-danger waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-deleteVideo-{{ $gallery->id }}"> <i class="bx bx-trash"></i> Delete</button>
+
+                            <!-- start modal edit -->
+                            <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-editVideo-{{ $gallery->id }}" data-bs-keyboard="false" data-bs-backdrop="static">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="myModalLabel">Form Edit Video</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{{ route('gallery.update', $gallery->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="formrow-firstname-input" class="form-label">Ganti Video</label>
+                                                    <input name="video" type="text" class="form-control" id="formrow-firstname-input" value="{{ $gallery->video }}">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                            <!-- start modal edit -->
+
+                            <!-- start modal Delete -->
+                            <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-deleteVideo-{{ $gallery->id }}" data-bs-keyboard="false" data-bs-backdrop="static">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="myModalLabel">Delete Data</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{{ route('gallery.destroy', $gallery->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <p> Apakah Sdr. {{ auth()->user()->name }} ingin menghapus Video ini</b>? </p>
+                                                    <div style="text-align: center;">
+                                                        <iframe class="embed-responsive-item" src="{{ $gallery->video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger waves-effect waves-light">Delete</button>
+                                            </div>
+                                        </form>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                            <!-- End modal Delete -->
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -200,7 +288,6 @@
 </div>
 <!-- End modal Delete -->
 @endforeach
-@endif
 
 <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-add" data-bs-keyboard="false" data-bs-backdrop="static">
     <div class="modal-dialog">
@@ -247,6 +334,10 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
+
+
+@endif
+
 
 @endsection
 

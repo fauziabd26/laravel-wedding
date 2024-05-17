@@ -35,38 +35,9 @@ class GalleryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'gallery1' => 'required|mimes:jpeg,png,jpg',
-            'gallery2' => 'required|mimes:jpeg,png,jpg',
-            'gallery3' => 'required|mimes:jpeg,png,jpg',
-            'gallery4' => 'mimes:jpeg,png,jpg',
-            'gallery5' => 'mimes:jpeg,png,jpg',
-            'gallery6' => 'mimes:jpeg,png,jpg',
-        ]);
-   
         $wedding = Wedding::where('user_id', Auth::user()->id)->first();
-        $photo1   = $request->file('gallery1');
-        $photo2   = $request->file('gallery2');
-        $photo3   = $request->file('gallery3');
-        $photo4   = $request->file('gallery4');
-        $photo5   = $request->file('gallery5');
-        $photo6   = $request->file('gallery6');
-        $photo1->storeAs('public/gallery/', $photo1->getClientOriginalName());
-        $photo2->storeAs('public/gallery/', $photo2->getClientOriginalName());
-        $photo3->storeAs('public/gallery/', $photo3->getClientOriginalName());
-        $photo4->storeAs('public/gallery/', $photo4->getClientOriginalName());
-        $photo5->storeAs('public/gallery/', $photo5->getClientOriginalName());
-        $photo6->storeAs('public/gallery/', $photo6->getClientOriginalName());
-        
-        
         Galery::create(array_merge($request->all(), [
             'wedding_id' => $wedding->id,
-            'gallery1'      => $photo1->getClientOriginalName(),
-            'gallery2'      => $photo2->getClientOriginalName(),
-            'gallery3'      => $photo3->getClientOriginalName(),
-            'gallery4'      => $photo4->getClientOriginalName(),
-            'gallery5'      => $photo5->getClientOriginalName(),
-            'gallery6'      => $photo6->getClientOriginalName(),
         ]));
         Alert::success('Success', 'Data Created Successfully');
         return redirect()->back();
@@ -80,7 +51,7 @@ class GalleryController extends Controller
         return redirect()->back();
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $gallery = Galery::findOrFail($id);
         $gallery->delete();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attachment;
+use App\Models\Galery;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,8 @@ class AttachmentController extends Controller
             }
             $attachments = Attachment::where('wedding_id', $wedding->id)->get();
             $existsAttachments = Attachment::where('wedding_id', $wedding->id)->first();
-            return view('admin.attachments.index', compact('attachments', 'existsAttachments'));
+            $gallery = Galery::where('wedding_id', $wedding->id)->first();
+            return view('admin.attachments.index', compact('attachments', 'existsAttachments', 'gallery'));
         }
     }
 
