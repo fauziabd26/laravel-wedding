@@ -413,6 +413,8 @@
             </a>
         </div> <!-- end ss-go-top -->
 
+        @if (@music !== null)
+
         <!-- Audio Button -->
         <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
             <i class="fa-solid fa-circle-pause"></i>
@@ -425,6 +427,7 @@
             <source src="{{ Storage::url('music') }}/{{ $music->file }}" type="audio/mpeg">
             <p>Browsermu tidak mendukung tag audio, upgrade donk!</p>
         </audio>
+        @endif
 
     </section> <!-- end s-details -->
 
