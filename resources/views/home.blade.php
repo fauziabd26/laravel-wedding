@@ -316,7 +316,9 @@
                             </div>
 
                             <div class="embed-responsive embed-responsive-16by9">
+                                @if (galery !== null)
                                 <iframe class="embed-responsive-item" src="{{ $galery->video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                @endif
                             </div>
                         </div>
                     </div>
