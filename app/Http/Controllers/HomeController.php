@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachment;
 use App\Models\Bride;
 use App\Models\Detail;
 use App\Models\Galery;
@@ -24,15 +25,15 @@ class HomeController extends Controller
         $detail         = Detail::where('wedding_id', $wedding->id)->orderBy('type', 'ASC')->get();
         $gift           = Gift::where('wedding_id', $wedding->id)->get();
         $thank          = Thank::where('wedding_id', $wedding->id)->get();
-        $galery         = Galery::where('wedding_id', $wedding->id)->get();
-        $bgImage         = Galery::where('wedding_id', $wedding->id)->first();
+        $galery         = Galery::where('wedding_id', $wedding->id)->first();
         $wish           = Wishes::where('wedding_id', $wedding->id)->orderby('id', 'desc')->get();
         $bank           = Bride::select('brides.name', 'brides.acc_name', 'brides.acc_number', 'brides.bank_id', 'banks.name as bank_name', 'banks.logo')->join('banks', 'banks.id', 'brides.bank_id')->where('wedding_id', $wedding->id)->get();
         $stories        = Story::where('wedding_id', $wedding->id)->get();
         $timeAkad       = Detail::where('wedding_id', $wedding->id)->where('type', 'Akad')->first();
         $music          = Music::where('wedding_id', $wedding->id)->first();
+        $attachment     = Attachment::where('wedding_id', $wedding->id)->get();
 
-        return view('home', compact('bride', 'detail', 'wedding', 'gift', 'bank', 'to', 'thank', 'wish', 'galery', 'stories', 'nameWedding', 'timeAkad','music','bgImage'));
+        return view('home', compact('bride', 'detail', 'wedding', 'gift', 'bank', 'to', 'thank', 'wish', 'galery', 'stories', 'nameWedding', 'timeAkad','music','attachment'));
     }
 
     public function store(Request $request, $name)

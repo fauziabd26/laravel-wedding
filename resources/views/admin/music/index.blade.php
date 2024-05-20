@@ -53,7 +53,7 @@
 
                     </div>
                     @else
-                    @if ($music=== null)
+                    @if ($music === null)
                     <!-- General Form Elements -->
                     <form method="POST" action="{{ route('music.store') }}" enctype="multipart/form-data" autocomplete="false" class="needs-validation" novalidate>
                         @csrf
@@ -79,7 +79,7 @@
                     <div class="row mb-3">
                         <label for="inputText" class="col-sm-2 col-form-label">Play Music</label>
                         <div class="col-sm-10">
-                            <audio controls>
+                            <audio controls autoplay>
                                 <source src="{{ Storage::url('music/') }}{{ $music->file }}" type="audio/mpeg">
                                 Browsermu tidak mendukung tag audio, upgrade donk!
                             </audio>

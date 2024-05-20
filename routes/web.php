@@ -51,6 +51,7 @@ Route::resource('/admin/invitations', InvitationsController::class);
 Route::post('/redaksi_store', [InvitationsController::class, 'redaksiStore'])->name('redaksi.store');
 Route::put('/redaksi_update/{id}', [InvitationsController::class, 'redaksiUpdate'])->name('redaksi.update');
 Route::post('/change-password', [UserController::class, 'changePasswordSave'])->name('postChangePassword');
+Route::post('/registerUser', [UserController::class, 'register'])->name('registeruser');
 Route::post('/thanks_store', [WishesController::class, 'thankStore'])->name('thankStore');
 Route::resource('/admin/music', MusicController::class);
 Route::resource('/admin/attachment', AttachmentController::class);

@@ -80,4 +80,17 @@ class UserController extends Controller
         Alert::success('success', "Password Changed Successfully");
         return redirect()->back();
     }
+    
+    public function register(Request $request)
+    {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => $request->is_admin,
+        ]);
+        
+        ALert::success('success', 'Register Berhasil. Akun Anda sudah Aktif silahkan Login menggunakan username dan password.');
+        return redirect('/');
+    }
 }

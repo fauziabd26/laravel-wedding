@@ -58,10 +58,9 @@
 
         <div class="s-intro__slider swiper-container">
             <div class="swiper-wrapper">
-                <div class="s-intro__slide swiper-slide" style="background-image: url(isset({{ Storage::url('gallery') }}/{{ $bgImage->gallery1 }}) ? asset({{ Storage::url('gallery') }}/{{ $bgImage->gallery1 }}) : asset('assets/ui/img/profile-img.jpg'));"></div>
-                <!-- <div class="s-intro__slide swiper-slide" style="background-image: url({{ isset(Auth::user()->photo) ? asset(Auth::user()->photo) : asset('assets/ui/img/profile-img.jpg') }});"></div> -->
-                <!-- <div class="bg-opacity-50 s-intro__slide swiper-slide" style="background-image: url({{ Storage::url('gallery') }}/{{ $bgImage->gallery2 }});"></div> -->
-                <!-- <div class="s-intro__slide swiper-slide bg-opacity-10" style="background-image: url({{ Storage::url('gallery') }}/{{ $bgImage->gallery3 }});"></div> -->
+                @foreach ($attachment as $data)
+                <div class="s-intro__slide swiper-slide" style="background-image: url('{{ Storage::url('gallery') }}/{{ $data->file }}');"></div>
+                @endforeach
             </div>
         </div>
 
@@ -304,47 +303,22 @@
 
                     <!-- 04 - tab gallery -->
                     <div id="tab-gallery" class="tab-content__item">
-                        @foreach ($galery as $item)
                         <div class="tz-gallery">
 
                             <div class="row">
+                                @foreach ($attachment as $item)
                                 <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery1 }}">
-                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery1 }}">
+                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->file }}">
+                                        <img src="{{ Storage::url('gallery') }}/{{ $item->file }}">
                                     </a>
                                 </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery2 }}">
-                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery2 }}">
-                                    </a>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery3 }}">
-                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery3 }}">
-                                    </a>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery4 }}">
-                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery4 }}">
-                                    </a>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery5 }}">
-                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery5 }}">
-                                    </a>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <a class="lightbox" href="{{ Storage::url('gallery') }}/{{ $item->gallery6 }}">
-                                        <img src="{{ Storage::url('gallery') }}/{{ $item->gallery6 }}">
-                                    </a>
-                                </div>
+                                @endforeach
                             </div>
 
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="{{ $item->video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" src="{{ $galery->video }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
-                        @endforeach
                     </div>
 
                     <!-- end 04 - tab gallery -->
@@ -438,21 +412,19 @@
                 </svg>
             </a>
         </div> <!-- end ss-go-top -->
-        @if ($music != null)
 
         <!-- Audio Button -->
         <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
             <i class="fa-solid fa-circle-pause"></i>
         </button> -->
 
-        <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio>
-        <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a>
+        <!-- <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio> -->
+        <!-- <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a> -->
 
-        <!-- <audio hidden autoplay loop>
+        <audio autoplay="true">
             <source src="{{ Storage::url('music') }}/{{ $music->file }}" type="audio/mpeg">
-            Browsermu tidak mendukung tag audio, upgrade donk!
-        </audio> -->
-        @endif
+            <p>Browsermu tidak mendukung tag audio, upgrade donk!</p>
+        </audio>
 
     </section> <!-- end s-details -->
 
