@@ -36,9 +36,9 @@ class MusicController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|max:2048',
+            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|max:10240',
         ], [
-            'file.max'  => 'Ukuran File Music Maximal 2MB!'
+            'file.max'  => 'Ukuran File Music Maximal 10MB!'
         ]);
         $wedding = Wedding::where('user_id', Auth::user()->id)->first();
         if ($request->hasFile('file')) {
@@ -82,9 +82,9 @@ class MusicController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|max:2048',
+            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|max:10240',
         ], [
-            'file.max'  => 'Ukuran File Music Maximal 2MB!'
+            'file.max'  => 'Ukuran File Music Maximal 10MB!'
         ]);
         $music = Music::findOrFail($id);
         if ($request->hasFile('file')) {
