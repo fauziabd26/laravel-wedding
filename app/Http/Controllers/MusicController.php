@@ -35,13 +35,11 @@ class MusicController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|',
+        $this->validate($request, [
+            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|max:2048',
+        ], [
+            'file.max'  => 'Ukuran File Music Maximal 2MB!'
         ]);
-
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()], 422);
-        }
         $wedding = Wedding::where('user_id', Auth::user()->id)->first();
         if ($request->hasFile('file')) {
             $file       = $request->file('file');
@@ -83,18 +81,24 @@ class MusicController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|max:2048',
+        ], [
+            'file.max'  => 'Ukuran File Music Maximal 2MB!'
+        ]);
         $music = Music::findOrFail($id);
         if ($request->hasFile('file')) {
             $file   = $request->file('file');
-            $file->storeAs('public/music/', $file->getClientOriginalName());
+            $filename   = Carbon::now()->format('Y-m-d-') . time() . '.' . $file->getClientOriginalName();
+            $file->storeAs('public/music/', $filename);
             Storage::delete('public/music/' . $music->file);
-            $music->update(array_merge($request->all(), [
-                'name'      => $file->getClientOriginalName(),
-                'file'      => $file->getClientOriginalName(),
-            ]));
-            Alert::success('Success!', 'Data Updated Successfully');
-            return redirect()->back();
         }
+        $music->update(array_merge($request->all(), [
+            'name'      => $file->getClientOriginalName(),
+            'file'      => $filename,
+        ]));
+        Alert::success('Success!', 'Data Updated Successfully');
+        return back();
     }
 
     /**

@@ -64,6 +64,15 @@
                                 <div class="invalid-feedback">
                                     File Music Tidak Boleh Kosong
                                 </div>
+                                @if (count($errors) > 0)
+                                <div class="alert alert-danger mt-3">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -92,6 +101,15 @@
                             <label for="inputText" class="col-sm-2 col-form-label">Ganti Music</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" name="file">
+                                @if (count($errors) > 0)
+                                <div class="alert alert-danger mt-3">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="row mb-3">
