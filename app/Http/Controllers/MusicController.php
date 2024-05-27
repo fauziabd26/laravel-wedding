@@ -45,7 +45,7 @@ class MusicController extends Controller
         $wedding = Wedding::where('user_id', Auth::user()->id)->first();
         if ($request->hasFile('file')) {
             $file       = $request->file('file');
-            $filename   = Carbon::now()->format('Y/m/d/') . time() . '.' . $file->getClientOriginalName();
+            $filename   = Carbon::now()->format('Y-m-d-') . time() . '.' . $file->getClientOriginalName();
             $file->storeAs('public/music/', $filename);
             // $music = new Music();
             // $music->wedding_id = $wedding->id;
