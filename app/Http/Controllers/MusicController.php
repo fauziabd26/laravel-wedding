@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Music;
 use App\Models\Wedding;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MusicController extends Controller
@@ -33,10 +35,18 @@ class MusicController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac|',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 422);
+        }
         $wedding = Wedding::where('user_id', Auth::user()->id)->first();
         if ($request->hasFile('file')) {
-            $file   = $request->file('file');
-            $file->storeAs('public/music/', $file->getClientOriginalName());
+            $file       = $request->file('file');
+            $filename   = Carbon::now()->format('Y/m/d/') . time() . '.' . $file->getClientOriginalName();
+            $file->storeAs('public/music/', $filename);
             // $music = new Music();
             // $music->wedding_id = $wedding->id;
             // $music->name = $file->getClientOriginalName();
@@ -45,7 +55,7 @@ class MusicController extends Controller
             Music::create(array_merge($request->all(), [
                 'wedding_id' => $wedding->id,
                 'name'       => $file->getClientOriginalName(),
-                'file'       => $file->getClientOriginalName()
+                'file'       => $filename
             ]));
             Alert::success('Success', 'Data Created Successfully');
         }
@@ -57,7 +67,7 @@ class MusicController extends Controller
      */
     public function show(Music $music)
     {
-        //
+        return $music;
     }
 
     /**

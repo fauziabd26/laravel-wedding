@@ -425,7 +425,7 @@
         <!-- <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio> -->
         <!-- <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a> -->
 
-        <audio autoplay="true">
+        <audio hidden autoplay loop>
             <source src="{{ Storage::url('music') }}/{{ $music->file }}" type="audio/mpeg">
             <p>Browsermu tidak mendukung tag audio, upgrade donk!</p>
         </audio>
