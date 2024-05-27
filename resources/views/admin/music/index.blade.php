@@ -85,7 +85,7 @@
                             </audio>
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('music.update', $music->id) }}" autocomplete="false">
+                    <form method="POST" action="{{ route('music.update', $music->id) }}" enctype="multipart/form-data" autocomplete="false">
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">

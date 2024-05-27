@@ -37,20 +37,15 @@ class MusicController extends Controller
         if ($request->hasFile('file')) {
             $file   = $request->file('file');
             $file->storeAs('public/music/', $file->getClientOriginalName());
-            // Music::create(array_merge($request->all(), [
-            //     'wedding_id' => $wedding->id,
-            //     'name'      => $file->getClientOriginalName(),
-            //     'file'      => $file->getClientOriginalName()
-            // ]));
-            $music = new Music();
-            $music->wedding_id = $wedding->id;
-            $music->name = $file->getClientOriginalName();
-            $music->file = $file->getClientOriginalName();
-            $music->save();
-            Alert::success('Success', 'Data Created Successfully');
-        } else {
+            // $music = new Music();
+            // $music->wedding_id = $wedding->id;
+            // $music->name = $file->getClientOriginalName();
+            // $music->file = $file->getClientOriginalName();
+            // $music->save();
             Music::create(array_merge($request->all(), [
                 'wedding_id' => $wedding->id,
+                'name'       => $file->getClientOriginalName(),
+                'file'       => $file->getClientOriginalName()
             ]));
             Alert::success('Success', 'Data Created Successfully');
         }
@@ -84,12 +79,9 @@ class MusicController extends Controller
             $file->storeAs('public/music/', $file->getClientOriginalName());
             Storage::delete('public/music/' . $music->file);
             $music->update(array_merge($request->all(), [
+                'name'      => $file->getClientOriginalName(),
                 'file'      => $file->getClientOriginalName(),
             ]));
-            Alert::success('Success!', 'Data Updated Successfully');
-            return redirect()->back();
-        } else {
-            $music->update($request->all());
             Alert::success('Success!', 'Data Updated Successfully');
             return redirect()->back();
         }
