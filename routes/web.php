@@ -32,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('phpinfo', function () {
+    return phpinfo();
+});
 Route::post('/home', [HomeController::class, 'store']);
 
 Route::get('/undangan/{name}', [HomeController::class, 'index'])->name('homeIndex');
