@@ -78,32 +78,34 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Data Harapan Orang Undangan</h5>
-                    <table class="table datatable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Ucapan</th>
-                                <th>Keterangan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($wishes as $key => $data)
-                            <tr>
-                                <td>{{ ++$key }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->comment }}</td>
-                                <td>
-                                    @if ($data->hadir == 'true')
-                                    <span class="badge bg-success"><i class="bi bi-check-circle"></i> Hadir</span>
-                                    @else
-                                    <span class="badge bg-danger"><i class="bi bi-x-circle-fill"> </i> Berhalangan</span>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Ucapan</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($wishes as $key => $data)
+                                <tr>
+                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->comment }}</td>
+                                    <td>
+                                        @if ($data->hadir == 'true')
+                                        <span class="badge bg-success"><i class="bi bi-check-circle"></i> Hadir</span>
+                                        @else
+                                        <span class="badge bg-danger"><i class="bi bi-x-circle-fill"> </i> Berhalangan</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
