@@ -20,6 +20,11 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous" as="style">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
     <title>{{ $wedding->name }}</title>
 
     <!-- mobile specific metas
@@ -39,22 +44,6 @@
 </head>
 
 <body id="top" class="ss-preload theme-slides">
-    @if ($music != null)
-
-    <!-- Audio Button -->
-    <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
-        <i class="fa-solid fa-circle-pause"></i>
-    </button> -->
-
-    <!-- <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio> -->
-    <!-- <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a> -->
-
-    {{-- <audio preload="none" src="{{ URL::asset('media') }}/{{ $music->file }}" controlslist="nodownload" type="audio/mp3"  hidden autoplay loop></audio> --}}
-    <audio controls autoplay>
-        <source src="{{ URL::asset('media') }}/{{ $music->file }}" type="audio/mpeg">
-        Browsermu tidak mendukung tag audio, upgrade donk!
-    </audio>
-    @endif
 
     <!-- preloader
     ================================================== -->
@@ -430,13 +419,17 @@
             </a>
         </div> <!-- end ss-go-top -->
     </section> <!-- end s-details -->
+    <button type="button" id="tombol-musik" fill="none" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ URL::asset('media') }}/{{ $music->file }}">
+        <i class="fa-solid fa-circle-pause"></i>
+    </button>
 
 
     <!-- Java Script
     ================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha256-gvZPYrsDwbwYJLD5yeBfcNujPhRoGOY831wwbIzz3t0=" crossorigin="anonymous"></script>
+
     <script src="assets/undangan/js/plugins.js"></script>
     <script src="assets/undangan/js/main.js"></script>
-    <script src="assets/undangan/js/app.js"></script>
     <Script>
         (function(html) {
 
@@ -519,6 +512,191 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
     <script>
         baguetteBox.run('.tz-gallery');
+    </script>
+    <script type="text/javascript">
+        const audio = (() => {
+            let audio = null;
+    
+            const singleton = () => {
+                if (!audio) {
+                    audio = new Audio();
+                    audio.src = document.getElementById('tombol-musik').getAttribute('data-url');
+                    audio.load();
+                    audio.currentTime = 0;
+                    audio.autoplay = true;
+                    audio.muted = false;
+                    audio.loop = true;
+                    audio.volume = 1;
+                }
+    
+                return audio;
+            };
+    
+            return {
+                play: () => singleton().play(),
+                pause: () => singleton().pause(),
+            };
+        })();
+    
+        const util = (() => {
+    
+            const opacity = (nama) => {
+                let nm = document.getElementById(nama);
+                let op = parseInt(nm.style.opacity);
+                let clear = null;
+    
+                clear = setInterval(() => {
+                    if (op >= 0) {
+                        nm.style.opacity = op.toString();
+                        op -= 0.025;
+                    } else {
+                        clearInterval(clear);
+                        clear = null;
+                        nm.remove();
+                        return;
+                    }
+                }, 10);
+            };
+    
+            const escapeHtml = (unsafe) => {
+                return unsafe
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            };
+    
+            const salin = (btn, msg = 'Tersalin', timeout = 1500) => {
+                navigator.clipboard.writeText(btn.getAttribute('data-nomer'));
+    
+                let tmp = btn.innerHTML;
+                btn.innerHTML = msg;
+                btn.disabled = true;
+    
+                let clear = null;
+                clear = setTimeout(() => {
+                    btn.innerHTML = tmp;
+                    btn.disabled = false;
+                    btn.focus();
+    
+                    clearTimeout(clear);
+                    clear = null;
+                    return;
+                }, timeout);
+            };
+    
+            const timer = () => {
+                let countDownDate = (new Date(document.getElementById('tampilan-waktu').getAttribute('data-waktu').replace(' ', 'T'))).getTime();
+    
+                setInterval(() => {
+                    let distance = Math.abs(countDownDate - (new Date()).getTime());
+    
+                    document.getElementById('hari').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    document.getElementById('jam').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    document.getElementById('menit').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById('detik').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+                }, 1000);
+            };
+    
+            const play = (btn) => {
+                if (btn.getAttribute('data-status') !== 'true') {
+                    btn.setAttribute('data-status', 'true');
+                    audio.play();
+                    btn.innerHTML = '<i class="fa-solid fa-circle-pause"></i>';
+                } else {
+                    btn.setAttribute('data-status', 'false');
+                    audio.pause();
+                    btn.innerHTML = '<i class="fa-solid fa-circle-play"></i>';
+                }
+            };
+    
+            const modal = (img) => {
+                document.getElementById('show-modal-image').src = img.src;
+                (new bootstrap.Modal('#modal-image')).show();
+            };
+    
+            const tamu = () => {
+                let name = (new URLSearchParams(window.location.search)).get('to');
+    
+                if (!name) {
+                    document.getElementById('nama-tamu').remove();
+                    return;
+                }
+    
+                let div = document.createElement('div');
+                div.classList.add('m-2');
+                div.innerHTML = `<p class="mt-0 mb-1 mx-0 p-0 text-light">Kepada Yth Bapak/Ibu/Saudara/i</p><h2 class="text-light">${escapeHtml(name)}</h2>`;
+    
+                document.getElementById('form-nama').value = name;
+                document.getElementById('nama-tamu').appendChild(div);
+            };
+    
+            const animation = async () => {
+                const duration = 10 * 1000;
+                const animationEnd = Date.now() + duration;
+                let skew = 1;
+    
+                let randomInRange = (min, max) => {
+                    return Math.random() * (max - min) + min;
+                };
+    
+                (async function frame() {
+                    const timeLeft = animationEnd - Date.now();
+                    const ticks = Math.max(200, 500 * (timeLeft / duration));
+    
+                    skew = Math.max(0.8, skew - 0.001);
+    
+                    await confetti({
+                        particleCount: 1,
+                        startVelocity: 0,
+                        ticks: ticks,
+                        origin: {
+                            x: Math.random(),
+                            y: Math.random() * skew - 0.2,
+                        },
+                        colors: ["FFC0CB", "FF69B4", "FF1493", "C71585"],
+                        shapes: ["heart"],
+                        gravity: randomInRange(0.5, 1),
+                        scalar: randomInRange(1, 2),
+                        drift: randomInRange(-0.5, 0.5),
+                    });
+    
+                    if (timeLeft > 0) {
+                        requestAnimationFrame(frame);
+                    }
+                })();
+            };
+    
+            const buka = async () => {
+                document.querySelector('body').style.overflowY = 'scroll';
+                AOS.init();
+                audio.play();
+    
+                opacity('welcome');
+                document.getElementById('tombol-musik').style.display = 'block';
+                timer();
+    
+                await confetti({
+                    origin: {
+                        y: 0.8
+                    },
+                    zIndex: 1057
+                });
+                await session.check();
+                await animation();
+            };
+    
+            return {
+                buka: buka,
+                tamu: tamu,
+                modal: modal,
+                play: play,
+                salin: salin,
+                escapeHtml: escapeHtml,
+                opacity: opacity
+            };
+        })();
     </script>
 
     @include('sweetalert::alert')

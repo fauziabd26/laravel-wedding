@@ -4320,3 +4320,10 @@ h1 {
 .credits a {
     color: var(--color);
 }
+
+.btn-music {
+    position: fixed;
+    bottom: 9vh;
+    right: 2vh;
+    z-index: 1055;
+}
