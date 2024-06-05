@@ -39,7 +39,22 @@
 </head>
 
 <body id="top" class="ss-preload theme-slides">
+    @if ($music != null)
 
+    <!-- Audio Button -->
+    <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
+        <i class="fa-solid fa-circle-pause"></i>
+    </button> -->
+
+    <!-- <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio> -->
+    <!-- <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a> -->
+
+    {{-- <audio preload="none" src="{{ URL::asset('media') }}/{{ $music->file }}" controlslist="nodownload" type="audio/mp3"  hidden autoplay loop></audio> --}}
+    <audio controls autoplay>
+        <source src="{{ URL::asset('media') }}/{{ $music->file }}" type="audio/mpeg">
+        Browsermu tidak mendukung tag audio, upgrade donk!
+    </audio>
+    @endif
 
     <!-- preloader
     ================================================== -->
@@ -414,24 +429,6 @@
                 </svg>
             </a>
         </div> <!-- end ss-go-top -->
-
-        @if ($music != null)
-
-        <!-- Audio Button -->
-        <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
-            <i class="fa-solid fa-circle-pause"></i>
-        </button> -->
-
-        <!-- <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio> -->
-        <!-- <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a> -->
-
-        {{-- <audio preload="none" src="{{ URL::asset('media') }}/{{ $music->file }}" controlslist="nodownload" type="audio/mp3"  hidden autoplay loop></audio> --}}
-        <audio controls autoplay>
-            <source src="{{ URL::asset('media') }}/{{ $music->file }}" type="audio/mpeg">
-            Browsermu tidak mendukung tag audio, upgrade donk!
-        </audio>
-        @endif
-
     </section> <!-- end s-details -->
 
 
