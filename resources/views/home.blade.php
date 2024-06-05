@@ -24,7 +24,7 @@
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous" as="style">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+
     <title>{{ $wedding->name }}</title>
 
     <!-- mobile specific metas
@@ -131,11 +131,11 @@
             </div>
         </div> <!-- s-intro__content -->
 
-        <div class="s-intro__scroll">
+        {{-- <div class="s-intro__scroll">
             <a href="#hidden" class="smoothscroll">
                 Scroll For More
             </a>
-        </div> <!-- s-intro__scroll -->
+        </div> <!-- s-intro__scroll --> --}}
 
     </section> <!-- end s-intro -->
 
@@ -410,14 +410,14 @@
             </div>
         </div>
 
-        <div class="ss-go-top">
+        {{-- <div class="ss-go-top">
             <a class="smoothscroll" title="Back to Top" href="#top">
                 <span>Back to Top</span>
                 <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="26" height="26">
                     <path d="M7.5 1.5l.354-.354L7.5.793l-.354.353.354.354zm-.354.354l4 4 .708-.708-4-4-.708.708zm0-.708l-4 4 .708.708 4-4-.708-.708zM7 1.5V14h1V1.5H7z" fill="currentColor"></path>
                 </svg>
             </a>
-        </div> <!-- end ss-go-top -->
+        </div> <!-- end ss-go-top --> --}}
     </section> <!-- end s-details -->
     <button type="button" id="tombol-musik" fill="none" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ URL::asset('media') }}/{{ $music->file }}">
         <i class="fa-solid fa-circle-pause"></i>
