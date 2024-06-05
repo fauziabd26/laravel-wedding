@@ -15,94 +15,6 @@
 </div><!-- End Page Title -->
 
 <section class="section">
-    @if (Auth::user()->is_admin == 0)
-    @if ($redaksi === null)
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="card-title">Form Redaksi kata</h5>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <form action="{{ route('redaksi.store') }}" method="POST">
-                            @csrf
-                            <label for="formrow-firstname-input" class="form-label">Redaksi Kata</label>
-                            <div class="mt-3">
-                                <textarea name="kata" type="text" class="form-control" id="formrow-firstname-input" rows="5" cols="5"></textarea>
-                                <button type="button" class="btn btn-info text-italic waves-effect waves-light btn-sm m-2" data-bs-toggle="modal" data-bs-target="#modal-Redaksi" data-placement="top" title="Klik Untuk Lihat Contoh Redaksi"> <i class="bi bi-info-circle"></i> Klik Untuk Lihat Contoh Redaksi</button>
-                            </div>
-                            <div class="col mt-2" style="text-align-last: right;">
-                                <button type="submit" class="btn btn-success waves-effect waves-light btn-sm m-2" data-bs-toggle="modal" data-bs-target="#modal-addThank"> <i class="bi bi-check-circle"></i> Save Form</button>
-                            </div>
-                        </form>
-                        <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-Redaksi">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="myModalLabel">Contoh Redaksi</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>
-                                            السلا م عليكم ورحمة الله وبر كا ته
-                                            <br /><br />
-                                            Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bpk/Ibu/Sdr/i *[ Lamjaya ]* untuk menghadiri Tasyakuran Pernikahan putra-putri kami. <br /><br />
-
-                                            https://kufita-fauzi.fauziaaf.cloud?to=Lamjaya <br /><br />
-
-                                            🗓 Hari, Tanggal : Sabtu, 10 Februari 2024 <br /><br />
-                                            🕛 Jam : 10.00 WIB - 17.00 <br /><br />
-                                            📍Alamat : Taman Komplek Baitul Karim, Jl. Bonjol Buntu Rt/Rw : 007/003, Kel. Jakasetia, Kec. Bekasi Selatan, Kota Bekasi
-                                            https://maps.app.goo.gl/gaLV4SHLNSFGUPtp7
-
-                                            Merupakan suatu kebahagiaan bagi kami apabila Bpk/Ibu/Sdr/i berkenan untuk hadir dan memberikan doa restu.
-                                            Mohon maaf perihal undangan hanya di bagikan melalui pesan ini, <br /><br />
-
-                                            Atas perhatiannya kami ucapkan Terimakasih. <br /><br />
-
-                                            والسلام عليكم ورحمة الله وبركا ته
-                                            <br /><br />
-                                            Hormat Kami,<br /><br />
-                                            *Bapak H. Sukardi & Ibu Hj. Karsini*
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @else
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="card-title">Form Redaksi Kata</h5>
-                        </div>
-                        <div class="col mt-2" style="text-align-last: right;">
-                            <button type="button" class="btn btn-warning waves-effect waves-light btn-sm m-2" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $redaksi->id }}"> <i class="bx bx-pencil"></i> Edit Form</button>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Redaksi Kata</label>
-                        <textarea disabled name="kata" type="text" class="form-control" id="formrow-firstname-input">{{ $redaksi->kata }}</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-    @endif
 
     <div class="row">
         <div class="col-lg-12">
@@ -112,13 +24,7 @@
                     <h5 class="card-title">Data Orang Yang Diundang</h5>
                     @if (Auth::user()->is_admin == 0)
                     <div class="col mt-2" style="text-align-last: right;">
-                        @if ($redaksi != null)
                         <button type="button" class="btn btn-primary waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-add"> <i class="bx bx-plus-circle"></i> Tambah Data</button>
-                        @else
-                        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm mr-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Silahkan isi redaksi terlebih dahulu"><i class="bx bx-plus-circle"></i>
-                            Tambah Data
-                        </button>
-                        @endif
                     </div>
                     @endif
                     <div class="table-responsive">
@@ -128,7 +34,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Link</th>
-                                    <th>Kata</th>
+                                    <th>Copy</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -138,7 +44,9 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $data->name }}</td>
                                     <td> <a href="{{ $data->link }}" target="_blank"> {{ $data->link }} </a> </td>
-                                    <td>{{ $data->Redaksi->kata }}</td>
+                                    <td>
+                                        <button class="btn btn-success waves-light btn-sm mb-2 rounded-3" data-nomer="{{ $data->kata }}" onclick="util.salin(this)"> <i class="bx bx-copy"></i> Salin Link</button>
+                                    </td>
                                     <td>
                                         <button type="button" class="btn btn-warning waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $data->id }}"> <i class="bx bx-pencil"></i> Edit</button>
                                         <button type="button" class="btn btn-danger waves-effect waves-light btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $data->id }}"> <i class="bx bx-trash"></i> Delete</button>
@@ -179,34 +87,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-@if ($redaksi != null)
-<!-- start modal edit -->
-<div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-{{ $redaksi->id }}">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Form Edit Wishes</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('redaksi.update', $redaksi->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="formrow-firstname-input" class="form-label">Redaksi Kata</label>
-                        <textarea rows="4" cols="4" name="kata" class="form-control" id="formrow-firstname-input">{{ $redaksi->kata }}</textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
-                </div>
-            </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
-<!-- End modal edit -->
-@endif
 @foreach ($invitations as $data)
 <!-- start modal edit -->
 <div class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" id="modal-edit-{{ $data->id }}">
@@ -266,4 +146,168 @@
 @endif
 
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    const util = (() => {
+
+        const opacity = (nama) => {
+            let nm = document.getElementById(nama);
+            let op = parseInt(nm.style.opacity);
+            let clear = null;
+
+            clear = setInterval(() => {
+                if (op >= 0) {
+                    nm.style.opacity = op.toString();
+                    op -= 0.025;
+                } else {
+                    clearInterval(clear);
+                    clear = null;
+                    nm.remove();
+                    return;
+                }
+            }, 10);
+        };
+
+        const escapeHtml = (unsafe) => {
+            return unsafe
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        };
+
+        const salin = (btn, msg = 'Tersalin', timeout = 1500) => {
+            navigator.clipboard.writeText(btn.getAttribute('data-nomer'));
+
+            let tmp = btn.innerHTML;
+            btn.innerHTML = msg;
+            btn.disabled = true;
+
+            let clear = null;
+            clear = setTimeout(() => {
+                btn.innerHTML = tmp;
+                btn.disabled = false;
+                btn.focus();
+
+                clearTimeout(clear);
+                clear = null;
+                return;
+            }, timeout);
+        };
+
+        const timer = () => {
+            let countDownDate = (new Date(document.getElementById('tampilan-waktu').getAttribute('data-waktu').replace(' ', 'T'))).getTime();
+
+            setInterval(() => {
+                let distance = Math.abs(countDownDate - (new Date()).getTime());
+
+                document.getElementById('hari').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById('jam').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('menit').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('detik').innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            }, 1000);
+        };
+
+        const play = (btn) => {
+            if (btn.getAttribute('data-status') !== 'true') {
+                btn.setAttribute('data-status', 'true');
+                audio.play();
+                btn.innerHTML = '<i class="fa-solid fa-circle-pause"></i>';
+            } else {
+                btn.setAttribute('data-status', 'false');
+                audio.pause();
+                btn.innerHTML = '<i class="fa-solid fa-circle-play"></i>';
+            }
+        };
+
+        const modal = (img) => {
+            document.getElementById('show-modal-image').src = img.src;
+            (new bootstrap.Modal('#modal-image')).show();
+        };
+
+        const tamu = () => {
+            let name = (new URLSearchParams(window.location.search)).get('to');
+
+            if (!name) {
+                document.getElementById('nama-tamu').remove();
+                return;
+            }
+
+            let div = document.createElement('div');
+            div.classList.add('m-2');
+            div.innerHTML = `<p class="mt-0 mb-1 mx-0 p-0 text-light">Kepada Yth Bapak/Ibu/Saudara/i</p><h2 class="text-light">${escapeHtml(name)}</h2>`;
+
+            document.getElementById('form-nama').value = name;
+            document.getElementById('nama-tamu').appendChild(div);
+        };
+
+        const animation = async () => {
+            const duration = 10 * 1000;
+            const animationEnd = Date.now() + duration;
+            let skew = 1;
+
+            let randomInRange = (min, max) => {
+                return Math.random() * (max - min) + min;
+            };
+
+            (async function frame() {
+                const timeLeft = animationEnd - Date.now();
+                const ticks = Math.max(200, 500 * (timeLeft / duration));
+
+                skew = Math.max(0.8, skew - 0.001);
+
+                await confetti({
+                    particleCount: 1,
+                    startVelocity: 0,
+                    ticks: ticks,
+                    origin: {
+                        x: Math.random(),
+                        y: Math.random() * skew - 0.2,
+                    },
+                    colors: ["FFC0CB", "FF69B4", "FF1493", "C71585"],
+                    shapes: ["heart"],
+                    gravity: randomInRange(0.5, 1),
+                    scalar: randomInRange(1, 2),
+                    drift: randomInRange(-0.5, 0.5),
+                });
+
+                if (timeLeft > 0) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        };
+
+        const buka = async () => {
+            document.querySelector('body').style.overflowY = 'scroll';
+            AOS.init();
+            audio.play();
+
+            opacity('welcome');
+            document.getElementById('tombol-musik').style.display = 'block';
+            timer();
+
+            await confetti({
+                origin: {
+                    y: 0.8
+                },
+                zIndex: 1057
+            });
+            await session.check();
+            await animation();
+        };
+
+        return {
+            buka: buka,
+            tamu: tamu,
+            modal: modal,
+            play: play,
+            salin: salin,
+            escapeHtml: escapeHtml,
+            opacity: opacity
+        };
+    })();
+</script>
 @endsection

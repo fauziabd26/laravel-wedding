@@ -30,8 +30,4 @@ class Invitations extends Model
         return $this->belongsTo(Wedding::class);
     }
     
-    public function Redaksi()
-    {
-        return $this->belongsTo(RedaksiKata::class, 'kata_id', 'id');
-    }
 }
