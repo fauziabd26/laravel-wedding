@@ -89,7 +89,7 @@
                         <label for="inputText" class="col-sm-2 col-form-label">Play Music</label>
                         <div class="col-sm-10">
                             <audio controls autoplay>
-                                <source src="{{ Storage::url('music/') }}{{ $music->file }}" type="audio/mpeg">
+                                <source src="{{ URL::asset('media') }}/{{ $music->file }}" type="audio/mpeg">
                                 Browsermu tidak mendukung tag audio, upgrade donk!
                             </audio>
                         </div>

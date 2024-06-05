@@ -43,13 +43,9 @@ class MusicController extends Controller
         $wedding = Wedding::where('user_id', Auth::user()->id)->first();
         if ($request->hasFile('file')) {
             $file       = $request->file('file');
+            $destinationPath = 'media';
             $filename   = Carbon::now()->format('Y-m-d-') . time() . '.' . $file->getClientOriginalName();
-            $file->storeAs('public/music/', $filename);
-            // $music = new Music();
-            // $music->wedding_id = $wedding->id;
-            // $music->name = $file->getClientOriginalName();
-            // $music->file = $file->getClientOriginalName();
-            // $music->save();
+            $request->file->move(public_path($destinationPath), $filename);
             Music::create(array_merge($request->all(), [
                 'wedding_id' => $wedding->id,
                 'name'       => $file->getClientOriginalName(),
@@ -60,25 +56,11 @@ class MusicController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Music $music)
     {
         return $music;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Music $music)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -89,9 +71,11 @@ class MusicController extends Controller
         $music = Music::findOrFail($id);
         if ($request->hasFile('file')) {
             $file   = $request->file('file');
+            $destinationPath = 'media';
             $filename   = Carbon::now()->format('Y-m-d-') . time() . '.' . $file->getClientOriginalName();
-            $file->storeAs('public/music/', $filename);
-            Storage::delete('public/music/' . $music->file);
+            $request->file->move(public_path($destinationPath), $filename);
+            $OldImage       = public_path('media/'.$music->file); 
+            unlink($OldImage);
         }
         $music->update(array_merge($request->all(), [
             'name'      => $file->getClientOriginalName(),
@@ -101,11 +85,4 @@ class MusicController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Music $music)
-    {
-        //
-    }
 }
