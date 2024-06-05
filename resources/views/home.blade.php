@@ -425,7 +425,7 @@
         <!-- <audio id="myAudio" src="{{ Storage::url('music') }}/{{ $music->file }}" preload="auto"></audio> -->
         <!-- <a type="button" class="btn btn-sm" onClick="togglePlay()">Click here to hear.</a> -->
 
-        <audio preload="none" src="{{ URL::asset('media') }}/{{ $music->file }}" src="{{ URL::asset('media') }}/{{ $music->file }}" hidden autoplay loop></audio>
+        <audio preload="none" src="{{ URL::asset('media') }}/{{ $music->file }}" controlslist="nodownload" type="audio/mp3"  hidden autoplay loop></audio>
         @endif
 
     </section> <!-- end s-details -->
