@@ -415,7 +415,7 @@
             </a>
         </div> <!-- end ss-go-top -->
 
-        @if ($music !== null)
+        @if ($music != null)
 
         <!-- Audio Button -->
         <!-- <button type="button" id="tombol-musik" style="display: none;" class="btn btn-light btn-sm rounded-circle btn-music" onclick="util.play(this)" data-status="true" data-url="{{ Storage::url('music/') }}{{ $music->file }}">
